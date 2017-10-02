@@ -1,0 +1,5 @@
+.idea/
+env/
+teste/
+*.swp
+__pycache__/
