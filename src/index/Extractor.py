@@ -1,9 +1,5 @@
 import textract
-from math import ceil, log
-from hashlib import md5
-import mmh3
-import fnv
-import pickle
+
 
 LANG = {
     "EN": "en-us",
@@ -12,18 +8,11 @@ LANG = {
 
 
 class Extractor:
-    def __init__(self, path, enc_path, key, lang="EN", false_positive=1.0E-6):
+    def __init__(self, path, lang="EN"):
         self.path = path
-        self.enc_path = enc_path
-        self.user_key = key
         self.raw_data = []
         self.stop_words = []
         self.data = []
-        self.filter = 0
-        self.hash_data = []
-        self.false_positive = false_positive
-        self.len_filter = -1
-        self.num_hash = -1
         self.lang = lang
 
     def extract(self):
@@ -48,47 +37,6 @@ class Extractor:
         try:
             stop = open("./stopwords/" + LANG[self.lang], "r").read().splitlines()
             self.data = [x for x in self.data if x not in stop]
-            return True
-        except Exception as e:
-            print(e)
-            return False
-
-    def calc(self):
-        try:
-            self.len_filter = ceil((len(self.data) * log(self.false_positive)) / log(1.0 / (pow(2.0, log(2.0)))))
-            self.num_hash = round(log(2.0) * self.len_filter / len(self.data))
-            return True
-        except Exception as e:
-            print(e)
-            return False
-
-    def hash_terms(self):
-        try:
-            self.hash_data = [bytes(md5(bytes(x + self.user_key, 'utf-8')).hexdigest(), "utf-8") for x in self.data]
-            return True
-        except Exception as e:
-            print(e)
-            return False
-
-    def build_filter(self):
-        try:
-            self.filter = (1 << self.len_filter)
-            for t in self.hash_data:
-                bits = [fnv.hash(t) % self.len_filter]
-                for i in range(self.num_hash - 1):
-                    bits.append(mmh3.hash(t, primes[i]) % self.len_filter)
-                for i in bits:
-                    self.filter |= (1 << i)
-            return True
-        except Exception as e:
-            print(e)
-            return False
-
-    def save_filter(self):
-        try:
-            file = open(self.enc_path, "wb")
-            pickle.dump(self.filter, file)
-            file.close()
             return True
         except Exception as e:
             print(e)

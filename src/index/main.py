@@ -1,12 +1,17 @@
-from src.mineirinho import Extractor
+from src.index.Extractor import Extractor
+from src.index.Filter import Filter
 
 
 if __name__ == "__main__":
-    ex = Extractor("../teste/in/file1", "../teste/out/file1", "MINHACHAVE", "PT", 1.0E-6)
+    ex = Extractor("teste/file1", "PT")
     assert ex.extract()
     assert ex.normalize()
     assert ex.filter_stop()
-    assert ex.calc()
-    assert ex.hash_terms()
-    assert ex.build_filter()
-    assert ex.save_filter()
+    fi = Filter(ex.data, "MYKEY", "teste/file1.out")
+    assert fi.calc()
+    assert fi.hash_terms()
+    assert fi.build_filter()
+    assert fi.save_filter()
+    fi2 = Filter([], "MYKEY", "teste/file1.out")
+    fi2.load_filter()
+
