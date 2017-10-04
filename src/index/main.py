@@ -1,17 +1,27 @@
-from src.index.Extractor import Extractor
-from src.index.Filter import Filter
+import src.index.tools as tools
+from src.index.QueryFilter import QueryFilter
+from src.index.PersistentFilter import PersistentFilter
+
+
+def test_index():
+    file = "teste/file5.pdf"
+    out_fil = "teste/.index/file5.out"
+    key = "MYKEY"
+    data = tools.hash_terms(tools.filter_stop(tools.normalize(tools.extract(file))), key)
+    f = PersistentFilter(data)
+    assert f.build_filter()
+    assert f.save_filter(out_fil)
+
+
+def test_query():
+    terms = ["exponential"]
+    key = "MYKEY"
+    path = "teste/.index/"
+    data = tools.hash_terms(tools.filter_stop(tools.normalize(terms)), key)
+    q = QueryFilter(data, path)
+    print(q.run_query())
 
 
 if __name__ == "__main__":
-    ex = Extractor("teste/file1", "PT")
-    assert ex.extract()
-    assert ex.normalize()
-    assert ex.filter_stop()
-    fi = Filter(ex.data, "MYKEY", "teste/file1.out")
-    assert fi.calc()
-    assert fi.hash_terms()
-    assert fi.build_filter()
-    assert fi.save_filter()
-    fi2 = Filter([], "MYKEY", "teste/file1.out")
-    fi2.load_filter()
-
+    # test_index()
+    test_query()
