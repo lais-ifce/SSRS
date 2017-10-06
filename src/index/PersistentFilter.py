@@ -1,6 +1,7 @@
 from src.index.Filter import Filter
 from math import ceil, log
 import pickle
+import time
 
 
 class PersistentFilter(Filter):
@@ -23,20 +24,22 @@ class PersistentFilter(Filter):
 
     def build_filter(self):
         try:
+            t1 = time.time()
             self.len_filter, self.num_hash = self.calc()
             self.filter = (1 << self.len_filter)
             for t in self.data:
                 for i in self.prepare_term(t, self.len_filter, self.num_hash):
                     self.filter |= (1 << i)
+            print("Filter Built in {} seconds".format(time.time()-t1))
             return True
         except Exception as e:
             print(e)
             raise
 
-    def save_filter(self, path):
+    def save_filter(self, path, enc_path):
         try:
             file = open(path, "wb")
-            pickle.dump((self.len_filter, self.num_hash, self.filter), file)
+            pickle.dump((enc_path, self.len_filter, self.num_hash, self.filter), file)
             file.close()
             return True
         except Exception as e:

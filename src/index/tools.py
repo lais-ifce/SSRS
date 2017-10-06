@@ -1,5 +1,6 @@
 import textract
 from hashlib import md5
+import time
 
 
 LANG = {
@@ -10,7 +11,9 @@ LANG = {
 
 def extract(path):
     try:
+        t1 = time.time()
         raw_data = textract.process(path)
+        print("Extraction done in {} seconds".format(time.time()-t1))
         data = raw_data.decode('utf-8').replace("\n", " ").split(" ")
         return data
     except Exception as e:
