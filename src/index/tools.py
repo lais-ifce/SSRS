@@ -1,6 +1,7 @@
 import textract
 from hashlib import md5
 import time
+import os
 
 
 LANG = {
@@ -33,7 +34,7 @@ def normalize(data):
 
 def filter_stop(data, lang="EN"):
     try:
-        stop = open("./stopwords/" + LANG[lang], "r").read().splitlines()
+        stop = open(os.path.join(os.path.dirname(__file__), 'stopwords/') + LANG[lang], "r").read().splitlines()
         data = [x for x in data if x not in stop]
         return data
     except Exception as e:

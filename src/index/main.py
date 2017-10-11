@@ -34,6 +34,4 @@ def test_query(base, query):
 
 
 if __name__ == "__main__":
-    folder = "/home/wsantos/MEGAsync/Books/"
-    # test_index(folder)
-    test_query(folder, "sin cos function")
+    pass
