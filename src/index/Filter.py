@@ -8,6 +8,13 @@ class Filter:
                        7043, 7057, 7069, 7079, 7103, 7109, 7121, 7127, 7129, 7151, 7159, 7177, 7187, 7193, 7207]
 
     def prepare_term(self, term, len_filter, num_hash):
+        """
+        Prepare terms to be inserted in filter
+        :param term: a term to be hashed
+        :param len_filter: size of filter in bits
+        :param num_hash: number of hash functions
+        :return: a list of bits that represent the term
+        """
         bits = [fnv.hash(term) % len_filter]
         for i in range(num_hash - 1):
             bits.append(mmh3.hash(term, self.primes[i]) % len_filter)

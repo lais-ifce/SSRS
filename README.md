@@ -8,6 +8,9 @@
 
 
 ## Dependencies
+
+- `pip install textract fnv murmurhash3`
+
 - Ubuntu
 
 `sudo apt install python-gi python-gi-cairo python3-gi python3-gi-cairo gir1.2-gtk-3.0 python-dev libxml2-dev libxslt1-dev antiword unrtf poppler-utils pstotext tesseract-ocr \
