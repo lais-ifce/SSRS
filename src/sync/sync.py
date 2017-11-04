@@ -1,5 +1,5 @@
-from event import Event
-from state import State
+from src.sync.event import Event
+from src.sync.state import State
 
 from subprocess import Popen, PIPE
 from hashlib import md5
@@ -12,8 +12,10 @@ import os
 
 from time import sleep
 
+
 def outra_funcao():
     pass
+
 
 def filesystem_main(command, fs_root, password):
     fs_root = os.path.abspath(fs_root)
@@ -28,7 +30,7 @@ def filesystem_main(command, fs_root, password):
         os.mkdir(fs_low)
         new_filesystem = True
 
-    encfs = Popen(['../fs/cmake-build-debug/dsfs', '-f', '-S', '--standard', fs_low, fs_root], stdin=PIPE)
+    encfs = Popen(['../dsfs/cmake-build-debug/dsfs', '-f', '-S', '--standard', fs_low, fs_root], stdin=PIPE)
 
     print('Sending IPC address')
     encfs.stdin.write(event_addr.encode())

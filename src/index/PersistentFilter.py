@@ -1,5 +1,5 @@
 from src.index.Filter import Filter
-from src.index.tools import debug
+from src.index.tools import *
 from math import ceil, log
 import pickle
 import time
@@ -9,17 +9,24 @@ class PersistentFilter(Filter):
     """
     Class that extends the Filter class. Have methods to built the filter and save it in a persistent way
     """
-    def __init__(self, data, false=1.0E-6):
+    def __init__(self, plain_path, enc_path, key, lang='EN', false=1.0E-6):
         """
-        :param data: list of all hashed terms to be inserted in the filter
+        :param plain_path: plain path to file that will be indexed
+        :param enc_path: encrypted path to file that will be indexed
+        :param key: user keypass
+        :param lang: document's language
         :param false: float number that determine the false positive tolerance. default is 1.0E-6
         """
+
         super(PersistentFilter, self).__init__()
-        self.data = data
+
+        self.data = hash_terms(filter_stop(normalize(extract(plain_path)), lang), key)
         self.false_positive = false
         self.len_filter = 0
         self.num_hash = 0
         self.filter = 0
+        self.path = plain_path
+        self.enc_path = enc_path
 
     def calc(self):
         """
@@ -52,16 +59,14 @@ class PersistentFilter(Filter):
             debug(e, True)
             raise
 
-    def save_filter(self, path, enc_path):
+    def save_filter(self):
         """
         Method that save the filter
-        :param path: destination path
-        :param enc_path: encrypted path of file
         :return: True if the operation is successful
         """
         try:
-            file = open(path, "wb")
-            pickle.dump((enc_path, self.len_filter, self.num_hash, self.filter), file)
+            file = open(self.path, "wb")
+            pickle.dump((self.enc_path, self.len_filter, self.num_hash, self.filter), file)
             file.close()
             debug("Filter stored with {} terms, {} hash functions, {} bits".format(len(self.data), self.num_hash,
                                                                                    self.len_filter))

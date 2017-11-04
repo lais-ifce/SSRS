@@ -1,4 +1,4 @@
-from file import FileInfo
+from src.sync.file import FileInfo
 import pickle
 
 class State:

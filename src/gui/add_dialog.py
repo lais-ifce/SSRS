@@ -32,9 +32,12 @@ class AddDialog(Gtk.Dialog):
 
     def eval_response(self, *args):
         if args[1] == Gtk.ResponseType.ACCEPT:
-            print(self.entry_remote.get_text())
             if self.entry_local.get_text() != "" and self.entry_remote.get_text() != "":
                 self.parent.mount_store.append([self.entry_local.get_text(), self.entry_remote.get_text(), "No"])
+                self.parent.mount_points.append({
+                    "local_path": self.entry_local.get_text(),
+                    "remote_path": self.entry_remote.get_text()
+                })
         self.destroy()
 
     def file_chooser(self, *args):
