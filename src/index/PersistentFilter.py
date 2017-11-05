@@ -34,9 +34,9 @@ class PersistentFilter(Filter):
         :return: a 2-tuple with the filter size and how much hash functions are needed
         """
         try:
-            len_filter = ceil((len(self.data) * log(self.false_positive)) / log(1.0 / (pow(2.0, log(2.0)))))
-            num_hash = round(log(2.0) * self.len_filter / len(self.data))
-            return int(len_filter), int(num_hash)
+            m = ceil((len(self.data) * log(self.false_positive)) / log(1.0 / (pow(2.0, log(2.0)))))
+            k = round(log(2.0) * m / len(self.data))
+            return m, k
         except Exception as e:
             debug(e, True)
             raise
@@ -47,9 +47,12 @@ class PersistentFilter(Filter):
         :return: True if the build is successful
         """
         try:
+            if len(self.data) < 1:
+                debug("File witout text")
+                return True
             t1 = time.time()
             self.len_filter, self.num_hash = self.calc()
-            self.filter = (1 << self.len_filter)
+            self.filter = (1 << int(self.len_filter))
             for t in self.data:
                 for i in self.prepare_term(t, self.len_filter, self.num_hash):
                     self.filter |= (1 << i)
@@ -65,8 +68,8 @@ class PersistentFilter(Filter):
         :return: True if the operation is successful
         """
         try:
-            file = open(self.path, "wb")
-            pickle.dump((self.enc_path, self.len_filter, self.num_hash, self.filter), file)
+            file = open(self.enc_path, "wb")
+            pickle.dump((self.len_filter, self.num_hash, self.filter), file)
             file.close()
             debug("Filter stored with {} terms, {} hash functions, {} bits".format(len(self.data), self.num_hash,
                                                                                    self.len_filter))

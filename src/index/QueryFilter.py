@@ -1,5 +1,6 @@
 from src.index.Filter import Filter
 from src.index.tools import debug
+from src.config import *
 import os
 import pickle
 import time
@@ -15,9 +16,9 @@ class QueryFilter(Filter):
         :param path: path to directory with user's indexes
         """
         super(QueryFilter, self).__init__()
+        self.path = os.path.join(INDEX_ROOT, path)
         self.terms = terms
-        self.filters = self.get_filters(path)
-        self.path = path
+        self.filters = self.get_filters(self.path)
 
     @staticmethod
     def get_filters(path):
@@ -43,10 +44,10 @@ class QueryFilter(Filter):
         """
         try:
             file = open(path, "rb")
-            enc_path, len_filter, num_hash, data = pickle.load(file)
+            len_filter, num_hash, data = pickle.load(file)
             file.close()
             debug("Filter {} loaded".format(path))
-            return enc_path, len_filter, num_hash, data
+            return len_filter, num_hash, data
         except Exception as e:
             debug(e, True)
             raise
@@ -59,13 +60,16 @@ class QueryFilter(Filter):
         result = []
         t0 = time.time()
         for p in self.filters:
-            enc_path, len_f, n_hash, data = self.load_filter(self.path + p)
+            debug(os.path.join(self.path, p))
+            len_f, n_hash, data = self.load_filter(os.path.join(self.path, p))
+            if n_hash < 1:
+                continue
             f = (1 << len_f)
             for t in self.terms:
                 for i in self.prepare_term(t, len_f, n_hash):
                     f |= (1 << i)
             if data & f == f:
-                result.append(enc_path)
+                result.append(p)
         debug("Search with {} terms in {} filters performed in {} seconds".format(len(self.terms),
               len(self.filters), int(time.time()-t0)))
         return result

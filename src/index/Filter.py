@@ -15,6 +15,8 @@ class Filter:
         :param num_hash: number of hash functions
         :return: a list of bits that represent the term
         """
+        if type(term) is not bytes:
+            term = bytes(term, 'utf-8')
         bits = [fnv.hash(term) % len_filter]
         for i in range(num_hash - 1):
             bits.append(mmh3.hash(term, self.primes[i]) % len_filter)

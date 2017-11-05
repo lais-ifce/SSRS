@@ -1,13 +1,16 @@
 from src.index.tools import *
-from src.index.QueryFilter import QueryFilter
+from src.config import *
 import subprocess
 import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk
+import json
+from requests import post
 
 
 class SearchDialog(Gtk.Dialog):
-    def __init__(self, parent):
+    def __init__(self, parent, remote_points):
+        self.remote_points = remote_points
         Gtk.Dialog.__init__(self, "Find", parent, 0, (Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT,
                                                       Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE))
         self.set_default_size(420, 250)
@@ -52,9 +55,12 @@ class SearchDialog(Gtk.Dialog):
         elif type(args[0]) is gi.repository.Gtk.ScrolledWindow and args[1].keyval == Gdk.KEY_Return:
             self.eval_response("", Gtk.ResponseType.ACCEPT)
 
-    def run_search(self, *args, path=".", key=""):
+    def run_search(self, *args):
         self.store_search.clear()
         terms = self.entry_search.get_text().split(" ")
-        terms = hash_terms(filter_stop(normalize(terms)), "MYKEY")
-        for item in QueryFilter(terms, path).run_query():
-            self.store_search.append([item.split("/")[-1], item])
+        terms = [x.decode('utf-8') for x in hash_terms(filter_stop(normalize(terms)), "MYKEY")]
+        for i in self.remote_points:
+            r = post(BASE_URL + "/search/" + i, data=json.dumps({'data': terms}),
+                     headers={"Content-type": "application/json"})
+            for item in r.json():
+                self.store_search.append([item.split("/")[-1], item])

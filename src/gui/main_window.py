@@ -81,16 +81,16 @@ class MainWindow(Gtk.ApplicationWindow):
         local = self.mount_store.get_value(selected[1], 0)
         remote = self.mount_store.get_value(selected[1], 1)
         if senha != "":
-            if self.mounted_fs.add_mount_point(local, remote, senha):
+            if self.mounted_fs.mount(local, remote, senha):
                 self.mount_store.set_value(selected[1], 2, "Yes")
 
     def action_unmount(self, widget):
         selected = self.tree_view.get_selection().get_selected()
-        if self.mounted_fs.rem_mount_point(self.mount_store.get_value(selected[1], 0)):
+        if self.mounted_fs.unmount(self.mount_store.get_value(selected[1], 0)):
             self.mount_store.set_value(selected[1], 2, "No")
 
     def action_search(self, widget):
-        SearchDialog(self)
+        SearchDialog(self, remote_points=self.mounted_fs.get_remote_mounted())
 
     def action_sync(self, widget):
         selected = self.tree_view.get_selection().get_selected()
