@@ -34,5 +34,4 @@ class Manage:
         return True
 
     def destroy(self):
-        for (path, mount) in self.mounted.keys():
-            self.unmount(path)
+        [self.unmount(x) for x in list(self.mounted.keys())]

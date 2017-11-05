@@ -9,7 +9,7 @@
 
 ## Dependencies
 
-- `pip install textract fnv murmurhash3`
+- `pip install textract fnv murmurhash3 zmq requests tornado`
 
 - Ubuntu
 
