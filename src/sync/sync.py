@@ -7,19 +7,17 @@ from hashlib import md5
 from multiprocessing import Queue
 from threading import Thread
 
+from queue import Empty as QueueEmptyError
+
 import sys
 import os
 
 from time import sleep
 
 
-def outra_funcao():
-    pass
-
-
 def filesystem_main(command, fs_root, password):
     fs_root = os.path.abspath(fs_root)
-    fs_low  = "%s/._ssrs_%s" % (os.path.dirname(fs_root), os.path.basename(fs_root))
+    fs_low = "%s/._ssrs_%s" % (os.path.dirname(fs_root), os.path.basename(fs_root))
 
     event_addr = "ipc:///tmp/%s" % (md5(str(fs_root).encode()).hexdigest())
 
@@ -30,7 +28,7 @@ def filesystem_main(command, fs_root, password):
         os.mkdir(fs_low)
         new_filesystem = True
 
-    encfs = Popen(['../dsfs/cmake-build-debug/dsfs', '-f', '-S', '--standard', fs_low, fs_root], stdin=PIPE)
+    encfs = Popen(['dsfs/cmake-build-debug/dsfs', '-f', '-S', '--standard', fs_low, fs_root], stdin=PIPE)
 
     print('Sending IPC address')
     encfs.stdin.write(event_addr.encode())
@@ -51,8 +49,10 @@ def filesystem_main(command, fs_root, password):
     event = Event(event_addr)
     fs = State()
 
+    print('Waiting for driver')
+    sleep(3)
+
     print('Restoring filesystem state')
-    sleep(1)
     fs.load(fs_root + '/._ssrs_state')
 
     print('Filesystem up and running')
@@ -63,11 +63,11 @@ def filesystem_main(command, fs_root, password):
         ev, path, cipher = event.recv()
 
         try:
-            cmd = command.get_nowait()
-            if cmd == 1:
+            message = command.get_nowait()
+            if message == 1:
                 print('Exit command received')
                 break
-        except:
+        except QueueEmptyError:
             pass
 
         if encfs.poll() is not None:
