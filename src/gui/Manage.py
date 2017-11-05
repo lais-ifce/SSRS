@@ -1,39 +1,38 @@
-from multiprocessing import Queue
 from src.sync.sync import filesystem_main
-from threading import Thread
+from multiprocessing import Process, Queue
 
 
 class Manage:
     def __init__(self):
-        self.mounted = []
+        self.mounted = {}
 
     def get_local_mounted(self):
-        return [x['path_local'] for x in self.mounted]
+        return [self.mounted[x]['path'] for x in self.mounted.keys()]
 
     def get_remote_mounted(self):
-        return [x['path_remoto'] for x in self.mounted]
+        return [self.mounted[x]['remote'] for x in self.mounted.keys()]
 
-    def mount(self, local, remote, password):
+    def mount(self, path, remote, password):
         cmd = Queue()
-        fs = Thread(target=filesystem_main, args=(cmd, local, password))
-        self.mounted.append({
-            "path_local": local,
-            "path_remoto": remote,
-            "queue": cmd,
-            "thread": fs
-        })
-        fs.start()
-        return fs.is_alive()
+        fs = Process(target=filesystem_main, args=(cmd, path, password))
+        if path not in self.mounted:
+            self.mounted[path] = {
+                "path": path,
+                "remote": remote,
+                "queue": cmd,
+                "thread": fs
+            }
+            fs.start()
+            return fs.is_alive()
 
-    def unmount(self, local):
-        for i in range(0, len(self.mounted)):
-            if self.mounted[i]['path_local'] == local:
-                self.mounted[i]['queue'].put(1)
-                self.mounted[i]['thread'].join()
-                del self.mounted[i]
-                return True
-        return False
+    def unmount(self, path):
+        mount = self.mounted.pop(path, None)
+        if mount is None:
+            return False
+        mount['queue'].put(1)
+        mount['thread'].join()
+        return True
 
     def destroy(self):
-        for i in self.mounted:
-            self.unmount(i['path_local'])
+        for (path, mount) in self.mounted.keys():
+            self.unmount(path)
