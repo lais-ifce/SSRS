@@ -29,6 +29,7 @@ class State:
             if fi.ref == 0 and fi.modified is True:
                 # print('File',path,'of cipher',f.path_cipher,'closed')
                 self.change_queue.put((2, fi.path, fi.cipher, ))
+                fi.modified = False
         except KeyError:
             print('Invalid file for close operation')
 
