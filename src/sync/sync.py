@@ -2,7 +2,7 @@ from src.sync.event import Event
 from src.sync.state import State
 
 from subprocess import Popen, PIPE
-from hashlib import md5
+from hashlib import md5, sha256
 
 from multiprocessing import Queue
 from threading import Thread
@@ -15,7 +15,7 @@ import os
 from time import sleep
 
 
-def filesystem_main(command, fs_root, password):
+def filesystem_main(command, change, fs_root, password):
     fs_root = os.path.abspath(fs_root)
     fs_low = "%s/._ssrs_%s" % (os.path.dirname(fs_root), os.path.basename(fs_root))
 
@@ -28,7 +28,7 @@ def filesystem_main(command, fs_root, password):
         os.mkdir(fs_low)
         new_filesystem = True
 
-    encfs = Popen(['../dsfs/cmake-build-debug/dsfs', '-f', '-S', '--standard', fs_low, fs_root], stdin=PIPE)
+    encfs = Popen(['dsfs/cmake-build-debug/dsfs', '-f', '-S', '--standard', fs_low, fs_root], stdin=PIPE)
 
     print('Sending IPC address')
     encfs.stdin.write(event_addr.encode())
@@ -47,10 +47,15 @@ def filesystem_main(command, fs_root, password):
     encfs.stdin.flush()
 
     event = Event(event_addr)
-    fs = State()
+    fs = State(change)
 
     print('Waiting for driver')
     sleep(3)
+    fskey = sha256(event._socket.recv()).hexdigest()
+
+    change.put(fskey)
+
+    print('Filesystem private key is', fskey)
 
     print('Restoring filesystem state')
     fs.load(fs_root + '/._ssrs_state')

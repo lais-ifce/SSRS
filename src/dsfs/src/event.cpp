@@ -30,6 +30,15 @@ EventInterface::~EventInterface()
     LOG(INFO) << "Event interface is down";
 }
 
+void EventInterface::sendFileSystemInfo(const std::string& volumeKey)
+{
+    zmq::message_t msg(volumeKey.c_str(), volumeKey.length());
+
+    if(!_socket.send(msg))
+        throw zmq::error_t();
+}
+
+
 void EventInterface::notify(event_type event, const char *path)
 {
     /// LOG(INFO) << "[" << pthread_self() << "] " << "Sending event " << event << " for " << path;

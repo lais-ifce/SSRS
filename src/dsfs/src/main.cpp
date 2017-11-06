@@ -17,6 +17,8 @@
 #include "Error.h"
 #include "FileUtils.h"
 #include "MemoryPool.h"
+#include "Cipher.h"
+#include "CipherKey.h"
 #include "autosprintf.h"
 #include "config.h"
 #include "encfs.h"
@@ -503,7 +505,7 @@ static bool processArgs(int argc, char *argv[],
 static void *idleMonitor(void *);
 
 void *encfs_init(fuse_conn_info *conn) {
-    auto *ctx = (EncFS_Context *) fuse_get_context()->private_data;
+    auto *ctx = (dsfs::Context *) fuse_get_context()->private_data;
 
     // set fuse connection options
     conn->async_read = 1u;
@@ -660,6 +662,10 @@ int main(int argc, char *argv[]) {
             // exit.  Only print information if fuse_main returned
             // immediately..
             time(&startTime);
+
+            ctx->event()->sendFileSystemInfo(
+                    rootInfo->cipher->encodeAsString(rootInfo->volumeKey, rootInfo->volumeKey)
+            );
 
             // fuse_main returns an error code in newer versions of fuse..
             int res = fuse_main(encfsArgs->fuseArgc,

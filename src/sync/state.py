@@ -1,15 +1,17 @@
 from src.sync.file import FileInfo
 import pickle
 
+
 class State:
-    def __init__(self):
+    def __init__(self, change):
         self.files = {}
+        self.change_queue = change
 
     def open(self, path, cipher):
         fi = self.files.get(path)
         if fi is None:
             self.files[path] = fi = FileInfo(path, cipher)
-        print('File',fi.path,'of cipher',fi.cipher,'opened')
+        print('File', fi.path, 'of cipher', fi.cipher, 'opened')
         fi.ref = fi.ref + 1
 
     def write(self, path):
@@ -18,7 +20,7 @@ class State:
             # print('File',file.path,'modified')
             fi.modified = True
         except KeyError:
-            print('Invalid file',path,'for write operation')
+            print('Invalid file', path, 'for write operation')
 
     def close(self, path):
         try:
@@ -26,12 +28,12 @@ class State:
             fi.ref = fi.ref - 1
             if fi.ref == 0:
                 # print('File',path,'of cipher',f.path_cipher,'closed')
-                pass
+                self.change_queue.put((2, fi.path, fi.cipher, ))
         except KeyError:
             print('Invalid file for close operation')
 
     def unlink(self, path):
-        print('File',path,'unlinked')
+        print('File', path, 'unlinked')
         self.files.pop(path, None)
 
     def load(self, path):
@@ -44,4 +46,3 @@ class State:
     def freeze(self, path):
         with open(path, 'wb+') as f:
             pickle.dump(self.files, f)
-

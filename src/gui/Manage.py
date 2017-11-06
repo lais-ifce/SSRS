@@ -1,4 +1,5 @@
 from src.sync.sync import filesystem_main
+from src.index.PersistentFilter import index_loop
 from multiprocessing import Process, Queue
 
 
@@ -13,24 +14,34 @@ class Manage:
         return [self.mounted[x]['remote'] for x in self.mounted.keys()]
 
     def mount(self, path, remote, password):
-        cmd = Queue()
-        fs = Process(target=filesystem_main, args=(cmd, path, password))
+        command = Queue()
+        event = Queue()
+
+        fs = Process(target=filesystem_main, args=(command, event, path, password))
+        fs.start()
+
+        key = event.get()
+
+        index = Process(target=index_loop, args=(event, path, key))
         if path not in self.mounted:
             self.mounted[path] = {
                 "path": path,
                 "remote": remote,
-                "queue": cmd,
-                "thread": fs
+                "cmd": command,
+                "fs": fs,
+                "index": index,
+                "key": key
             }
-            fs.start()
-            return fs.is_alive()
+            index.start()
+            return fs.is_alive() and index.is_alive()
 
     def unmount(self, path):
         mount = self.mounted.pop(path, None)
         if mount is None:
             return False
-        mount['queue'].put(1)
-        mount['thread'].join()
+        mount['cmd'].put(1)
+        mount['fs'].join()
+        mount['index'].join()
         return True
 
     def destroy(self):

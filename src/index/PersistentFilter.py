@@ -79,9 +79,9 @@ class PersistentFilter(Filter):
             raise
 
 
-def index_loop(command):
+def index_loop(command, fs_root, key):
     while True:
-        ev, path, enc_path, key = command.get()
+        ev, path, enc_path = command.get()
         if ev == 1:
             debug("Exiting")
             break

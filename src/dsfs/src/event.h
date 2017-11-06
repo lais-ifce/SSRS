@@ -1,8 +1,8 @@
 #ifndef DSFS_EVENT_H
 #define DSFS_EVENT_H
 
-#include <zmq.hpp>
 #include <pthread.h>
+#include <zmq.hpp>
 
 namespace dsfs
 {
@@ -21,6 +21,7 @@ namespace dsfs
             EVENT_RENAME,
         };
         explicit EventInterface(Context *context, const std::string& event_addr);
+        void sendFileSystemInfo(const std::string& volumeKey);
         void notify(event_type event, const char *path);
         ~EventInterface();
     private:
