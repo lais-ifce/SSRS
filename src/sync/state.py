@@ -26,7 +26,7 @@ class State:
         try:
             fi = self.files[path]
             fi.ref = fi.ref - 1
-            if fi.ref == 0:
+            if fi.ref == 0 and fi.modified is True:
                 # print('File',path,'of cipher',f.path_cipher,'closed')
                 self.change_queue.put((2, fi.path, fi.cipher, ))
         except KeyError:
