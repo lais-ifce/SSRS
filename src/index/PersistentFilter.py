@@ -77,3 +77,14 @@ class PersistentFilter(Filter):
         except Exception as e:
             debug(e, True)
             raise
+
+
+def index_loop(command):
+    while True:
+        ev, path, enc_path, key = command.get()
+        if ev == 1:
+            debug("Exiting")
+            break
+        pf = PersistentFilter(path, enc_path, key)
+        assert pf.build_filter()
+        assert pf.save_filter()
