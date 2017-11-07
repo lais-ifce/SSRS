@@ -1,6 +1,5 @@
 from src.sync.event import Event
 from src.sync.state import State
-from src.config import BASE_URL
 
 from subprocess import Popen, PIPE
 from hashlib import md5, sha256
@@ -108,10 +107,15 @@ def sync_index(fs_root, remote):
         files = [x for x in files if re.fullmatch(r'([0-9a-fA-F]){32}', x) is not None]
         remote = remote + "/" if remote[-1] != "/" else remote
         for f in files:
-            r = requests.put(remote + "search", files={
-                "index": open(os.path.join(source, f), "rb")
-            })
-            assert r.status_code == 200
+            with open(os.path.join(source, f), "rb") as file:
+                r = requests.put(remote + "search", files={
+                    "index": file
+                })
+                assert r.status_code == 200
+            try:
+                os.remove(os.path.join(source, f))
+            except Exception as e:
+                pass
     exit(0)
 
 
