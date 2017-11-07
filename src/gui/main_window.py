@@ -90,7 +90,7 @@ class MainWindow(Gtk.ApplicationWindow):
             self.mount_store.set_value(selected[1], 2, "No")
 
     def action_search(self, widget):
-        SearchDialog(self, remote_points=self.mounted_fs.get_remote_mounted())
+        SearchDialog(self)
 
     def action_sync(self, widget):
         selected = self.tree_view.get_selection().get_selected()

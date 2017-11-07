@@ -9,8 +9,8 @@ from requests import post
 
 
 class SearchDialog(Gtk.Dialog):
-    def __init__(self, parent, remote_points):
-        self.remote_points = remote_points
+    def __init__(self, parent):
+        self.parent = parent
         Gtk.Dialog.__init__(self, "Find", parent, 0, (Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT,
                                                       Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE))
         self.set_default_size(420, 250)
@@ -57,10 +57,14 @@ class SearchDialog(Gtk.Dialog):
 
     def run_search(self, *args):
         self.store_search.clear()
-        terms = self.entry_search.get_text().split(" ")
-        terms = [x.decode('utf-8') for x in hash_terms(filter_stop(normalize(terms)), "MYKEY")]
-        for i in self.remote_points:
-            r = post(BASE_URL + "/search/" + i, data=json.dumps({'data': terms}),
+        mounted = self.parent.mounted_fs.mounted
+        for path in mounted.keys():
+            key = mounted[path]['key']
+            terms = self.entry_search.get_text().split(" ")
+            terms = [x.decode('utf-8') for x in hash_terms(filter_stop(normalize(terms)), key)]
+            url = mounted[path]['remote'] + '/' if mounted[path]['remote'][-1] != '/' else mounted[path]['remote']
+            r = post(url + 'search', data=json.dumps({'data': terms}),
                      headers={"Content-type": "application/json"})
-            for item in r.json():
-                self.store_search.append([item.split("/")[-1], item])
+            if "ok" in r.json().keys() and r.json()['ok']:
+                for item in r.json()['data']:
+                    self.store_search.append([item.split("/")[-1], item])
