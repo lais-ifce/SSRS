@@ -94,7 +94,10 @@ class MainWindow(Gtk.ApplicationWindow):
 
     def action_sync(self, widget):
         selected = self.tree_view.get_selection().get_selected()
-        self.confirm(self, "Sincronizado")
+        if self.confirm(self, "Really want sync this repository?"):
+            local = self.mount_store.get_value(selected[1], 0)
+            remote = self.mount_store.get_value(selected[1], 1)
+            self.mounted_fs.start_sync(local, remote)
 
     @staticmethod
     def get_password(parent):

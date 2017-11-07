@@ -1,4 +1,4 @@
-from src.sync.sync import filesystem_main
+from src.sync.sync import filesystem_main, sync_index
 from src.index.PersistentFilter import index_loop
 from multiprocessing import Process, Queue
 
@@ -43,6 +43,11 @@ class Manage:
         mount['fs'].join()
         mount['index'].join()
         return True
+
+    def start_sync(self, local, remote):
+        if local in self.mounted.keys():
+            sync = Process(target=sync_index, args=(local, remote))
+            sync.start()
 
     def destroy(self):
         [self.unmount(x) for x in list(self.mounted.keys())]

@@ -1,6 +1,7 @@
 from src.index.Filter import Filter
 from src.index.tools import *
 from math import ceil, log
+from hashlib import md5
 import pickle
 import time
 
@@ -85,6 +86,17 @@ def index_loop(command, fs_root, key):
         if ev == 1:
             debug("Exiting")
             break
-        pf = PersistentFilter(path, enc_path, key)
-        assert pf.build_filter()
-        assert pf.save_filter()
+        if not os.path.exists(os.path.join(fs_root, ".index")):
+            try:
+                os.mkdir(os.path.join(fs_root, ".index"))
+            except Exception as e:
+                debug(e, True)
+                raise
+        print("path:", path)
+        print("fsroot", fs_root)
+        path = path[1:] if path[0] == "/" else path
+        enc_path = os.path.join(fs_root, ".index/", md5(bytes(enc_path, 'utf-8')).hexdigest())
+        if not os.path.basename(os.path.abspath(os.path.join(fs_root, path))).startswith(".") and ".index/" not in path:
+            pf = PersistentFilter(os.path.join(fs_root, path), enc_path, key)
+            assert pf.build_filter()
+            assert pf.save_filter()

@@ -1,5 +1,6 @@
 from src.sync.event import Event
 from src.sync.state import State
+from src.config import BASE_URL
 
 from subprocess import Popen, PIPE
 from hashlib import md5, sha256
@@ -11,6 +12,8 @@ from queue import Empty as QueueEmptyError
 
 import sys
 import os
+import re
+import requests
 
 from time import sleep
 
@@ -28,7 +31,7 @@ def filesystem_main(command, change, fs_root, password):
         os.mkdir(fs_low)
         new_filesystem = True
 
-    encfs = Popen(['dsfs/cmake-build-debug/dsfs', '-f', '-S', '--standard', fs_low, fs_root], stdin=PIPE)
+    encfs = Popen(['../dsfs/cmake-build-debug/dsfs', '-f', '-S', '--standard', fs_low, fs_root], stdin=PIPE)
 
     print('Sending IPC address')
     encfs.stdin.write(event_addr.encode())
@@ -70,6 +73,7 @@ def filesystem_main(command, change, fs_root, password):
         try:
             message = command.get_nowait()
             if message == 1:
+                change.put((1, "", "",))
                 print('Exit command received')
                 break
             elif message == 2:
@@ -95,6 +99,20 @@ def filesystem_main(command, change, fs_root, password):
     encfs.terminate()
     encfs.wait()
     print('Bye')
+
+
+def sync_index(fs_root, remote):
+    source = os.path.join(fs_root, ".index")
+    if os.path.exists(source):
+        files = os.listdir(source)
+        files = [x for x in files if re.fullmatch(r'([0-9a-fA-F]){32}', x) is not None]
+        remote = remote + "/" if remote[-1] != "/" else remote
+        for f in files:
+            r = requests.put(remote + "search", files={
+                "index": open(os.path.join(source, f), "rb")
+            })
+            assert r.status_code == 200
+    exit(0)
 
 
 if __name__ == '__main__':
