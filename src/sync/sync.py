@@ -72,6 +72,8 @@ def filesystem_main(command, change, fs_root, password):
             if message == 1:
                 print('Exit command received')
                 break
+            elif message == 2:
+                print('Syncing filesystem')
         except QueueEmptyError:
             pass
 
