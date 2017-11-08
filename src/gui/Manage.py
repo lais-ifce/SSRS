@@ -17,7 +17,7 @@ class Manage:
         command = Queue()
         event = Queue()
 
-        fs = Process(target=filesystem_main, args=(command, event, path, password))
+        fs = Process(target=filesystem_main, args=(command, event, path, remote, password))
         fs.start()
 
         key = event.get()
@@ -45,9 +45,10 @@ class Manage:
         return True
 
     def start_sync(self, local, remote):
-        if local in self.mounted.keys():
-            sync = Process(target=sync_index, args=(local, remote))
-            sync.start()
+        mount = self.mounted.get(local)
+        if mount is None:
+            return
+        mount['cmd'].put(2)
 
     def destroy(self):
         [self.unmount(x) for x in list(self.mounted.keys())]

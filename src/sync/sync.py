@@ -3,6 +3,7 @@ from src.sync.state import State
 
 from subprocess import Popen, PIPE
 from hashlib import md5, sha256
+from base64 import b64encode
 
 from multiprocessing import Queue
 from threading import Thread
@@ -17,7 +18,7 @@ import requests
 from time import sleep
 
 
-def filesystem_main(command, change, fs_root, password):
+def filesystem_main(command, change, fs_root, remote, password):
     fs_root = os.path.abspath(fs_root)
     fs_low = "%s/._ssrs_%s" % (os.path.dirname(fs_root), os.path.basename(fs_root))
 
@@ -76,7 +77,9 @@ def filesystem_main(command, change, fs_root, password):
                 print('Exit command received')
                 break
             elif message == 2:
-                print('Syncing filesystem')
+                print('Sync command received')
+                sync_index(fs_root, remote)
+                sync_filesystem(fs, fs_low, fs_root, remote)
         except QueueEmptyError:
             pass
 
@@ -100,6 +103,74 @@ def filesystem_main(command, change, fs_root, password):
     print('Bye')
 
 
+def upload_local_block(file, fs_low, remote):
+    cipher = file.cipher[len(fs_low):]
+    uri = b64encode(cipher.encode()).decode()
+
+    print('Uploading file', file.path)
+    try:
+        with open(file.cipher, 'rb') as f:
+            if requests.put(remote + '/put/' + uri, data=f).status_code is not 200:
+                return False
+    except FileNotFoundError:
+        return False
+
+    return True
+
+
+def download_remote_block(file, fs_low, remote):
+    cipher = file.cipher[len(fs_low):]
+    uri = b64encode(cipher.encode()).decode()
+
+    r = requests.get(remote + '/get/' + uri, stream=True)
+    if r.status_code is not 200:
+        return False
+
+    try:
+        with open(file.cipher, 'wb') as f:
+            for chunk in r.iter_content(1024**2):
+                f.write(chunk)
+    except FileNotFoundError:
+        return False
+
+    return True
+
+
+def load_remote_state(file, fs_low, fs_root, remote):
+    if download_remote_block(file, fs_low, remote) is False:
+        return None
+
+    state = State(None)
+    state.load(fs_root + file.path)
+
+    return state
+
+
+def sync_filesystem(state, fs_low, fs_root, remote):
+    print('Syncing filesystem of root', fs_root, 'for remote', remote)
+    try:
+        state_file = state.files['/._ssrs_state']
+
+        remote_state = load_remote_state(state_file, fs_low, fs_root, remote)
+        if remote_state is not None:
+            for (key, file) in remote_state.files.items():
+                if key not in state.files:
+                        state.files[key] = file
+
+        state_file.modified = False
+        for (key, file) in state.files.items():
+            if file.modified is True:
+                upload_local_block(file, fs_low, remote)
+                file.modified = False
+            else:
+                download_remote_block(file, fs_low, remote)
+
+        state.freeze(fs_root + '/._ssrs_state')
+        upload_local_block(state_file, fs_low, remote)
+    except Exception as e:
+        print('Failed filesystem sync:', e)
+
+
 def sync_index(fs_root, remote):
     source = os.path.join(fs_root, ".index")
     if os.path.exists(source):
@@ -116,7 +187,7 @@ def sync_index(fs_root, remote):
                 os.remove(os.path.join(source, f))
             except Exception as e:
                 pass
-    exit(0)
+    # exit(0)
 
 
 if __name__ == '__main__':
