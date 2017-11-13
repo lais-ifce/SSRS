@@ -18,7 +18,7 @@ import requests
 from time import sleep
 
 
-def filesystem_main(command, change, fs_root, remote, password):
+def filesystem_main(command, change, query, fs_root, remote, password):
     fs_root = os.path.abspath(fs_root)
     fs_low = "%s/._ssrs_%s" % (os.path.dirname(fs_root), os.path.basename(fs_root))
 
@@ -72,14 +72,22 @@ def filesystem_main(command, change, fs_root, remote, password):
 
         try:
             message = command.get_nowait()
-            if message == 1:
+            if message[0] == 1:
                 change.put((1, "", "",))
                 print('Exit command received')
                 break
-            elif message == 2:
+            elif message[0] == 2:
                 print('Sync command received')
                 sync_index(fs_root, remote)
                 sync_filesystem(fs, fs_low, fs_root, remote)
+            elif message[0] == 3:
+                cipher = message[1]
+                fi = fs.lookup.get(cipher)
+                if fi is not None:
+                    query.put(fi.path)
+                else:
+                    print('Failed decoding', cipher)
+                    query.put('None')
         except QueueEmptyError:
             pass
 
@@ -87,7 +95,7 @@ def filesystem_main(command, change, fs_root, remote, password):
             exit('FATAL: File system has exited')
 
         if ev == event.EVENT_OPEN:
-            fs.open(path, cipher)
+            fs.open(path, os.path.relpath(cipher, fs_low))
         elif ev == event.EVENT_WRITE:
             fs.write(path)
         elif ev == event.EVENT_RELEASE:
@@ -104,12 +112,11 @@ def filesystem_main(command, change, fs_root, remote, password):
 
 
 def upload_local_block(file, fs_low, remote):
-    cipher = file.cipher[len(fs_low):]
-    uri = b64encode(cipher.encode()).decode()
+    uri = b64encode(file.cipher.encode()).decode()
 
     print('Uploading file', file.path)
     try:
-        with open(file.cipher, 'rb') as f:
+        with open(os.path.join(fs_low, file.cipher), 'rb') as f:
             if requests.put(remote + '/put/' + uri, data=f).status_code is not 200:
                 return False
     except FileNotFoundError:
@@ -119,15 +126,14 @@ def upload_local_block(file, fs_low, remote):
 
 
 def download_remote_block(file, fs_low, remote):
-    cipher = file.cipher[len(fs_low):]
-    uri = b64encode(cipher.encode()).decode()
+    uri = b64encode(file.cipher.encode()).decode()
 
     r = requests.get(remote + '/get/' + uri, stream=True)
     if r.status_code is not 200:
         return False
 
     try:
-        with open(file.cipher, 'wb') as f:
+        with open(os.path.join(fs_low, file.cipher), 'wb') as f:
             for chunk in r.iter_content(1024**2):
                 f.write(chunk)
     except FileNotFoundError:
@@ -141,7 +147,7 @@ def load_remote_state(file, fs_low, fs_root, remote):
         return None
 
     state = State(None)
-    state.load(fs_root + file.path)
+    state.load(os.path.join(fs_root, file.path))
 
     return state
 
@@ -155,7 +161,7 @@ def sync_filesystem(state, fs_low, fs_root, remote):
         if remote_state is not None:
             for (key, file) in remote_state.files.items():
                 if key not in state.files:
-                        state.files[key] = file
+                    state.files[key] = file
 
         state_file.modified = False
         for (key, file) in state.files.items():
@@ -175,7 +181,7 @@ def sync_index(fs_root, remote):
     source = os.path.join(fs_root, ".index")
     if os.path.exists(source):
         files = os.listdir(source)
-        files = [x for x in files if re.fullmatch(r'([0-9a-fA-F]){32}', x) is not None]
+        # files = [x for x in files if re.fullmatch(r'([0-9a-fA-F]){32}', x) is not None]
         remote = remote + "/" if remote[-1] != "/" else remote
         for f in files:
             with open(os.path.join(source, f), "rb") as file:

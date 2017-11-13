@@ -5,12 +5,14 @@ import pickle
 class State:
     def __init__(self, change):
         self.files = {}
+        self.lookup = {}
         self.change_queue = change
 
     def open(self, path, cipher):
         fi = self.files.get(path)
         if fi is None:
             self.files[path] = fi = FileInfo(path, cipher)
+            self.lookup[fi.cipher] = fi
         # print('File', fi.path, 'of cipher', fi.cipher, 'opened')
         fi.ref = fi.ref + 1
 
@@ -29,7 +31,7 @@ class State:
             fi.ref = fi.ref - 1
             if fi.ref == 0 and fi.written is True:
                 # print('File',path,'of cipher',f.path_cipher,'closed')
-                self.change_queue.put((2, fi.path, fi.cipher, ))
+                self.change_queue.put((2, fi.path, fi.cipher,))
                 fi.written = False
         except KeyError:
             print('Invalid file for close operation')
@@ -42,6 +44,8 @@ class State:
         try:
             with open(path, 'rb') as f:
                 self.files = pickle.load(f)
+                for file in self.files.values():
+                    self.lookup[file.cipher] = file
         except FileNotFoundError:
             self.freeze(path)
 

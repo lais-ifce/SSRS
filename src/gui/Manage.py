@@ -16,13 +16,15 @@ class Manage:
     def mount(self, path, remote, password):
         command = Queue()
         event = Queue()
+        query = Queue()
 
-        fs = Process(target=filesystem_main, args=(command, event, path, remote, password))
+        fs = Process(target=filesystem_main, args=(command, event, query, path, remote, password))
         fs.start()
 
         key = event.get()
 
         index = Process(target=index_loop, args=(event, path, key))
+
         if path not in self.mounted:
             self.mounted[path] = {
                 "path": path,
@@ -30,7 +32,8 @@ class Manage:
                 "cmd": command,
                 "fs": fs,
                 "index": index,
-                "key": key
+                "key": key,
+                "q": query
             }
             index.start()
             return fs.is_alive() and index.is_alive()
@@ -39,7 +42,7 @@ class Manage:
         mount = self.mounted.pop(path, None)
         if mount is None:
             return False
-        mount['cmd'].put(1)
+        mount['cmd'].put((1,))
         mount['fs'].join()
         mount['index'].join()
         return True
@@ -48,7 +51,7 @@ class Manage:
         mount = self.mounted.get(local)
         if mount is None:
             return
-        mount['cmd'].put(2)
+        mount['cmd'].put((2,))
 
     def destroy(self):
         [self.unmount(x) for x in list(self.mounted.keys())]

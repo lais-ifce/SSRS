@@ -1,7 +1,7 @@
 from src.index.Filter import Filter
 from src.index.tools import *
 from math import ceil, log
-from hashlib import md5
+from base64 import b64encode
 import pickle
 import time
 
@@ -95,7 +95,7 @@ def index_loop(command, fs_root, key):
         print("path:", path)
         print("fsroot", fs_root)
         path = path[1:] if path[0] == "/" else path
-        enc_path = os.path.join(fs_root, ".index/", md5(bytes(enc_path, 'utf-8')).hexdigest())
+        enc_path = os.path.join(fs_root, ".index/", b64encode(enc_path.encode()).decode())
         if not os.path.basename(os.path.abspath(os.path.join(fs_root, path))).startswith(".") and ".index/" not in path:
             pf = PersistentFilter(os.path.join(fs_root, path), enc_path, key)
             assert pf.build_filter()

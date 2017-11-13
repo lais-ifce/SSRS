@@ -1,3 +1,4 @@
+
 class FileInfo:
     def __init__(self, path, cipher, modified=False):
         self.path = path

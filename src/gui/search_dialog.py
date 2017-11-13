@@ -7,6 +7,8 @@ from gi.repository import Gtk, Gdk
 import json
 from requests import post
 
+from base64 import b64decode
+
 
 class SearchDialog(Gtk.Dialog):
     def __init__(self, parent):
@@ -66,5 +68,7 @@ class SearchDialog(Gtk.Dialog):
             r = post(url + 'search', data=json.dumps({'data': terms}),
                      headers={"Content-type": "application/json"})
             if "ok" in r.json().keys() and r.json()['ok']:
-                for item in r.json()['data']:
-                    self.store_search.append([item.split("/")[-1], item])
+                for cipher in r.json()['data']:
+                    mounted[path]['cmd'].put((3, b64decode(cipher.encode()).decode()))
+                    item = mounted[path]['q'].get().split('/')[-1]
+                    self.store_search.append([item, os.path.join(mounted[path]['path'], item)])
