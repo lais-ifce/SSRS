@@ -147,7 +147,7 @@ def load_remote_state(file, fs_low, fs_root, remote):
         return None
 
     state = State(None)
-    state.load(os.path.join(fs_root, file.path))
+    state.load(os.path.join(fs_root, file.path[1:]))
 
     return state
 
