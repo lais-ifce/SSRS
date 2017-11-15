@@ -1,218 +1,231 @@
 from src.sync.event import Event
 from src.sync.state import State
+from src.sync.network import SyncNetwork
+from src.index.tools import debug
 
 from subprocess import Popen, PIPE
-from hashlib import md5, sha256
-from base64 import b64encode
 
-from multiprocessing import Queue
-from threading import Thread
+from hashlib import md5, sha256
 
 from queue import Empty as QueueEmptyError
 
-import sys
-import os
-import requests
-
 from time import sleep
 
+import os
 
-def filesystem_main(command, change, query, fs_root, remote, password):
-    fs_root = os.path.abspath(fs_root)
-    fs_low = "%s/._ssrs_%s" % (os.path.dirname(fs_root), os.path.basename(fs_root))
 
-    event_addr = "ipc:///tmp/%s" % (md5(str(fs_root).encode()).hexdigest())
+class Sync:
+    """
+    This class is responsible for controling the low-level filesystem driver.
+    It also performs synchronization operations of the filesystem data.
+    """
+    def __init__(self, command_queue, event_queue, query_queue, fs_root, remote):
+        """
+        Create a new mountable filesystem instance.
+        :param command_queue: Queue for sending commands to the filesystem.
+        :param event_queue: Queue from which events in the filesystem will be transmited.
+        :param query_queue: Queue for querying the filesystem state.
+        :param fs_root: The root directory to mount the filesystem.
+        :param remote: The remote URI used to sync the filesystem.
+        """
+        self._fs_root = os.path.abspath(fs_root)
+        self._fs_low = "%s/._ssrs_%s" % (os.path.dirname(fs_root), os.path.basename(fs_root))
+        self._cmd_queue = command_queue
+        self._event_queue = event_queue
+        self._q_queue = query_queue
 
-    new_filesystem = False
+        self._state = None
+        self._driver = None
+        self._encfs = None
 
-    if not os.path.exists(fs_low + '/.encfs6.xml'):
-        print('Filesystem does not exist')
-        os.mkdir(fs_low)
-        new_filesystem = True
+        self._network = SyncNetwork(self._fs_low, fs_root, remote)
 
-    encfs = Popen(['../dsfs/cmake-build-debug/dsfs', '-f', '-S', '--standard', fs_low, fs_root], stdin=PIPE)
+    def mount(self, password, from_remote=False):
+        """
+        Attempts to mount the filesystem in the determined root directory.
+        :param password: The filesystem secret key
+        :param from_remote: Synchronize the remote filesystem instead of creating a new one.
+        :return:
+        """
+        event_addr = "ipc:///tmp/%s" % (md5(str(self._fs_root).encode()).hexdigest())
 
-    print('Sending IPC address')
-    encfs.stdin.write(event_addr.encode())
-    encfs.stdin.write(b'\n')
-    encfs.stdin.flush()
+        new_filesystem = False
 
-    if new_filesystem:
-        print('Creating new filesystem...')
+        if not os.path.exists(self._fs_low + '/.encfs6.xml'):
+            # TODO: Create filesystem from remote
+            if from_remote is True:
+                pass
+            debug('Filesystem "%s" does not exist in' % (self._fs_root,))
+            os.mkdir(self._fs_low)
+            new_filesystem = True
+
+        self._encfs = encfs = Popen([
+            '../dsfs/cmake-build-debug/dsfs', '-f', '-S', '--standard',
+            self._fs_low,
+            self._fs_root],
+            stdin=PIPE)
+
+        debug('Sending IPC address to driver')
+        encfs.stdin.write(event_addr.encode())
+        encfs.stdin.write(b'\n')
+        encfs.stdin.flush()
+
+        if new_filesystem is True:
+            debug('Creating new filesystem in %s' % (self._fs_root,))
+            encfs.stdin.write(password.encode())
+            encfs.stdin.write(b'\n')
+            encfs.stdin.flush()
+
+        debug('Sending filesystem password')
         encfs.stdin.write(password.encode())
         encfs.stdin.write(b'\n')
         encfs.stdin.flush()
 
-    print('Sending filesystem password')
-    encfs.stdin.write(password.encode())
-    encfs.stdin.write(b'\n')
-    encfs.stdin.flush()
+        self._driver = Event(event_addr)
+        self._state = State(self._event_queue)
 
-    event = Event(event_addr)
-    fs = State(change)
+        debug('Waiting for driver')
 
-    print('Waiting for driver')
-
-    fskey = None
-    retry = 3
-    while retry > 0:
-        sleep(1)
-        fskey = event.connect()
-        if fskey is not None:
-            fskey = sha256(fskey).hexdigest()
-            break
-        retry = retry - 1
-
-    if fskey is None:
-        exit('Failed to initialize filesystem driver')
-
-    change.put(fskey)
-
-    print('Filesystem private key is', fskey)
-
-    print('Restoring filesystem state')
-    fs.load(fs_root + '/._ssrs_state')
-
-    print('Filesystem up and running')
-
-    # print(fs.files)
-
-    while True:
-        ev, path, cipher = event.recv()
-
-        try:
-            message = command.get_nowait()
-            if message[0] == 1:
-                change.put((1, "", "",))
-                print('Exit command received')
+        fskey = None
+        retry = 3
+        while retry > 0:
+            sleep(1)
+            fskey = self._driver.connect()
+            if fskey is not None:
+                fskey = sha256(fskey).hexdigest()
                 break
-            elif message[0] == 2:
-                print('Sync command received')
-                sync_index(fs_root, remote)
-                sync_filesystem(fs, fs_low, fs_root, remote)
-            elif message[0] == 3:
-                cipher = message[1]
-                fi = fs.lookup.get(cipher)
-                if fi is not None:
-                    query.put(fi.path)
-                else:
-                    print('Failed decoding', cipher)
-                    query.put('None')
-        except QueueEmptyError:
-            pass
+            retry = retry - 1
 
-        if encfs.poll() is not None:
-            exit('FATAL: File system has exited')
+        if fskey is None:
+            raise Exception('Could not initialize filesystem driver')
 
-        if ev == event.EVENT_OPEN:
-            fs.open(path, os.path.relpath(cipher, fs_low))
-        elif ev == event.EVENT_WRITE:
-            fs.write(path)
-        elif ev == event.EVENT_RELEASE:
-            fs.close(path)
-        elif ev == event.EVENT_UNLINK:
-            fs.unlink(path)
+        # self._event_queue.put(fskey)
 
-    print('Freezing filesystem state')
-    fs.freeze(fs_root + '/._ssrs_state')
-    print('Terminating filesystem driver')
-    encfs.terminate()
-    encfs.wait()
-    print('Bye')
+        debug('Filesystem private key is %s' % (fskey,))
+        debug('Restoring filesystem state')
+        self._state.load(self._fs_root + '/._ssrs_state')
 
+        return fskey
 
-def upload_local_block(file, fs_low, remote):
-    uri = b64encode(file.cipher.encode()).decode()
+    def load_remote_state(self, block):
+        """
+        Attempt to load the remote filesystem state from the specified block.
+        :param block:
+        :return:
+        """
+        if self._network.download_remote_block(block) is False:
+            return None
 
-    print('Uploading file', file.path)
-    try:
-        with open(os.path.join(fs_low, file.cipher), 'rb') as f:
-            if requests.put(remote + '/put/' + uri, data=f).status_code is not 200:
-                return False
-    except FileNotFoundError:
-        return False
+        state = State(None)
+        state.load(os.path.join(self._fs_root, block.path[1:]))
 
-    return True
+        return state
 
+    def sync_filesystem(self):
+        """
+        Sync the filesystem data with the remote server.
+        :return:
+        """
+        debug('Syncing filesystem of root %s' % (self._fs_root,))
+        state_file = self._state.files['/._ssrs_state']
 
-def download_remote_block(file, fs_low, remote):
-    uri = b64encode(file.cipher.encode()).decode()
-
-    r = requests.get(remote + '/get/' + uri, stream=True)
-    if r.status_code is not 200:
-        return False
-
-    try:
-        with open(os.path.join(fs_low, file.cipher), 'wb') as f:
-            for chunk in r.iter_content(1024**2):
-                f.write(chunk)
-    except FileNotFoundError:
-        return False
-
-    return True
-
-
-def load_remote_state(file, fs_low, fs_root, remote):
-    if download_remote_block(file, fs_low, remote) is False:
-        return None
-
-    state = State(None)
-    state.load(os.path.join(fs_root, file.path[1:]))
-
-    return state
-
-
-def sync_filesystem(state, fs_low, fs_root, remote):
-    print('Syncing filesystem of root', fs_root, 'for remote', remote)
-    try:
-        state_file = state.files['/._ssrs_state']
-
-        remote_state = load_remote_state(state_file, fs_low, fs_root, remote)
+        remote_state = self.load_remote_state(state_file)
         if remote_state is not None:
             for (key, file) in remote_state.files.items():
-                if key not in state.files:
-                    state.files[key] = file
+                if key not in self._state.files:
+                    self._state.files[key] = file
 
         state_file.modified = False
-        for (key, file) in state.files.items():
+        for (key, file) in self._state.files.items():
             if file.modified is True:
-                upload_local_block(file, fs_low, remote)
+                self._network.upload_local_block(file)
                 file.modified = False
             else:
-                download_remote_block(file, fs_low, remote)
+                self._network.download_remote_block(file)
 
-        state.freeze(fs_root + '/._ssrs_state')
-        upload_local_block(state_file, fs_low, remote)
-    except Exception as e:
-        print('Failed filesystem sync:', e)
+        self._state.freeze(self._fs_root + '/._ssrs_state')
+        self._network.upload_local_block(state_file)
 
+    def main_loop(self):
+        """
+        This is the main loop responsible for processing events and updating filesystem state.
+        This method will block until the filesystem is requested to finish or an unexpected error occurs.
+        :return:
+        """
+        debug('Filesystem up and running')
 
-def sync_index(fs_root, remote):
-    source = os.path.join(fs_root, ".index")
-    if os.path.exists(source):
-        files = os.listdir(source)
-        # files = [x for x in files if re.fullmatch(r'([0-9a-fA-F]){32}', x) is not None]
-        remote = remote + "/" if remote[-1] != "/" else remote
-        for f in files:
-            with open(os.path.join(source, f), "rb") as file:
-                r = requests.put(remote + "search", files={
-                    "index": file
-                })
-                assert r.status_code == 200
+        while True:
+            ev, path, cipher = self._driver.recv()
+
             try:
-                os.remove(os.path.join(source, f))
-            except Exception as e:
+                message = self._cmd_queue.get_nowait()
+
+                if message[0] == 1:
+                    self._event_queue.put((1, "", "",))
+                    debug('Exit command received')
+                    break
+                elif message[0] == 2:
+                    debug('Sync command received')
+                    try:
+                        self._network.sync_index()
+                        self.sync_filesystem()
+                    except Exception as e:
+                        debug('Failed to synchronize filesystem %s: %s' % (self._fs_root, e,))
+                elif message[0] == 3:
+                    cipher = message[1]
+                    fi = self._state.lookup.get(cipher)
+                    if fi is not None:
+                        self._q_queue.put(fi.path)
+                    else:
+                        debug('Failed decoding %s' % (cipher,))
+                        self._q_queue.put('None')
+            except QueueEmptyError:
                 pass
-    # exit(0)
+
+            if self._encfs.poll() is not None:
+                raise Exception('File system driver has exited unexpectedly')
+
+            if ev == self._driver.EVENT_OPEN:
+                self._state.open(path, os.path.relpath(cipher, self._fs_low))
+            elif ev == self._driver.EVENT_WRITE:
+                self._state.write(path)
+            elif ev == self._driver.EVENT_RELEASE:
+                self._state.close(path)
+            elif ev == self._driver.EVENT_UNLINK:
+                self._state.unlink(path)
+
+        debug('Freezing filesystem state')
+        self._state.freeze(self._fs_root + '/._ssrs_state')
+        debug('Terminating filesystem driver')
+        self._encfs.terminate()
+        self._encfs.wait()
 
 
-if __name__ == '__main__':
-    if len(sys.argv) < 3:
-        exit('Missing arguments')
-    cmd = Queue()
-    fs = Thread(target=filesystem_main, args=(cmd, sys.argv[1], sys.argv[2]))
-    fs.start()
-    input()
-    cmd.put(1)
-    fs.join()
+def filesystem_main(command, event, query, fs_root, remote, password):
+    """
+    This is a bootstrap function used as main entry point for the filesystem.
+    It is responsible for trying to mount the filesystem and running its main loop.
+    :param command:
+    :param event:
+    :param query:
+    :param fs_root:
+    :param remote:
+    :param password:
+    :return:
+    """
+    filesystem = Sync(command, event, query, fs_root, remote)
 
+    try:
+        fskey = filesystem.mount(password)
+    except Exception as e:
+        event.put((False, str(e), None))
+        return
+
+    event.put((True, "It works!", fskey))
+
+    try:
+        filesystem.main_loop()
+    except Exception as e:
+        debug('Filesystem has finished unexpectedly: %s' % (e,))
+
+    debug('bye')

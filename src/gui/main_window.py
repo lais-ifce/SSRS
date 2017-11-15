@@ -81,8 +81,11 @@ class MainWindow(Gtk.ApplicationWindow):
         local = self.mount_store.get_value(selected[1], 0)
         remote = self.mount_store.get_value(selected[1], 1)
         if senha != "":
-            if self.mounted_fs.mount(local, remote, senha):
+            result, message = self.mounted_fs.mount(local, remote, senha)
+            if result is True:
                 self.mount_store.set_value(selected[1], 2, "Yes")
+            else:
+                pass
 
     def action_unmount(self, widget):
         selected = self.tree_view.get_selection().get_selected()
