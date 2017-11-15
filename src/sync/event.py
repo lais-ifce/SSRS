@@ -1,6 +1,7 @@
 from struct import unpack
 import zmq
 
+
 class Event:
     EVENT_NONE = 0
     EVENT_OPEN = 1
@@ -16,6 +17,12 @@ class Event:
         self._socket = self._context.socket(zmq.PAIR)
         self._socket.setsockopt(zmq.RCVTIMEO, 100)
         self._socket.connect(ipc_addr)
+
+    def connect(self):
+        try:
+            return self._socket.recv()
+        except zmq.ZMQError:
+            return None
 
     def recv(self):
         try:

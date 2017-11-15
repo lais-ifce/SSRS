@@ -12,7 +12,6 @@ from queue import Empty as QueueEmptyError
 
 import sys
 import os
-import re
 import requests
 
 from time import sleep
@@ -53,8 +52,19 @@ def filesystem_main(command, change, query, fs_root, remote, password):
     fs = State(change)
 
     print('Waiting for driver')
-    sleep(3)
-    fskey = sha256(event._socket.recv()).hexdigest()
+
+    fskey = None
+    retry = 3
+    while retry > 0:
+        sleep(1)
+        fskey = event.connect()
+        if fskey is not None:
+            fskey = sha256(fskey).hexdigest()
+            break
+        retry = retry - 1
+
+    if fskey is None:
+        exit('Failed to initialize filesystem driver')
 
     change.put(fskey)
 
