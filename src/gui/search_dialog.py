@@ -1,17 +1,22 @@
 from src.index.tools import *
-from src.config import *
 import subprocess
+from requests import post
+from base64 import b64decode
+import json
 import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk
-import json
-from requests import post
-
-from base64 import b64decode
 
 
 class SearchDialog(Gtk.Dialog):
+    """
+    Class that extends Gtk.Dialog and is used to manage user's queries and their answers
+    """
     def __init__(self, parent):
+        """
+        Constructor
+        :param parent: Gtk parent window
+        """
         self.parent = parent
         Gtk.Dialog.__init__(self, "Find", parent, 0, (Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT,
                                                       Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE))
@@ -44,6 +49,12 @@ class SearchDialog(Gtk.Dialog):
         self.run()
 
     def eval_response(self, *args):
+        """
+        Evaluate the dialog response and when it is `ACCEPT` the selected file is opened with the xdg
+        default application
+        :param args: Gtk args
+        :return: None
+        """
         if args[1] == Gtk.ResponseType.ACCEPT:
             selection = self.tree_view.get_selection().get_selected()
             path = self.store_search.get_value(selection[1], 1)
@@ -52,12 +63,23 @@ class SearchDialog(Gtk.Dialog):
             self.destroy()
 
     def eval_key(self, *args):
+        """
+        Evaluate pressed keys and trig the related action
+        :param args: Gtk args
+        :return: None
+        """
         if type(args[0]) is gi.repository.Gtk.SearchEntry and args[1].keyval == Gdk.KEY_Return:
             self.run_search()
         elif type(args[0]) is gi.repository.Gtk.ScrolledWindow and args[1].keyval == Gdk.KEY_Return:
             self.eval_response("", Gtk.ResponseType.ACCEPT)
 
     def run_search(self, *args):
+        """
+        Perform a remote search with the terms entered on the search box on all mounted file systems and put the
+        results on the tree view
+        :param args: Gtk args
+        :return: None
+        """
         self.store_search.clear()
         mounted = self.parent.mounted_fs.mounted
         for path in mounted.keys():
