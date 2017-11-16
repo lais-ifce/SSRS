@@ -13,12 +13,12 @@ class Manage:
     def get_remote_mounted(self):
         return [self.mounted[x]['remote'] for x in self.mounted.keys()]
 
-    def mount(self, path, remote, password):
+    def mount(self, path, remote, password, download):
         command = Queue()
         event = Queue()
         query = Queue()
 
-        fs = Process(target=filesystem_main, args=(command, event, query, path, remote, password))
+        fs = Process(target=filesystem_main, args=(command, event, query, path, remote, password, download))
         fs.start()
 
         result, status, key = event.get()

@@ -26,7 +26,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.inside_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         self.scrl = Gtk.ScrolledWindow()
         self.scrl.set_vexpand(True)
-        self.mount_store = Gtk.ListStore(str, str, str)
+        self.mount_store = Gtk.ListStore(str, str, str, bool)
         self.tree_view = Gtk.TreeView(self.mount_store)
         self.tree_view.append_column(Gtk.TreeViewColumn("Local Path", Gtk.CellRendererText(), text=0))
         self.tree_view.append_column(Gtk.TreeViewColumn("Remote Path", Gtk.CellRendererText(), text=1))
@@ -66,7 +66,7 @@ class MainWindow(Gtk.ApplicationWindow):
             with open(MOUNT_POINT_FILE, "rb") as f:
                 self.mount_points = pickle.load(f)
                 for i in self.mount_points:
-                    self.mount_store.append([i['local_path'], i['remote_path'], "No"])
+                    self.mount_store.append([i['local_path'], i['remote_path'], "No", i['download']])
         else:
             self.mount_points = []
 
@@ -101,8 +101,9 @@ class MainWindow(Gtk.ApplicationWindow):
         senha = self.get_password(self)
         local = self.mount_store.get_value(selected[1], 0)
         remote = self.mount_store.get_value(selected[1], 1)
+        download = self.mount_store.get_value(selected[1], 3)
         if senha != "":
-            result, message = self.mounted_fs.mount(local, remote, senha)
+            result, message = self.mounted_fs.mount(local, remote, senha, download)
             if result is True:
                 self.mount_store.set_value(selected[1], 2, "Yes")
             else:
