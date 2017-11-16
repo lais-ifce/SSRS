@@ -3,6 +3,8 @@ from src.sync.state import State
 from src.sync.network import SyncNetwork
 from src.index.tools import debug
 
+from src.sync.file import FileInfo
+
 from subprocess import Popen, PIPE
 
 from hashlib import md5, sha256
@@ -51,13 +53,17 @@ class Sync:
 
         new_filesystem = False
 
-        if not os.path.exists(self._fs_low + '/.encfs6.xml'):
-            # TODO: Create filesystem from remote
-            if from_remote is True:
-                pass
+        config = self._fs_low + '/.encfs6.xml'
+        if not os.path.exists(config):
             debug('Filesystem "%s" does not exist in' % (self._fs_root,))
             os.mkdir(self._fs_low)
-            new_filesystem = True
+            if from_remote is True:
+                configuration = self._network.get_remote_configuration('.encfs6.xml')
+                if configuration is not None:
+                    with open(config, 'wb') as f:
+                        f.write(configuration)
+            else:
+                new_filesystem = True
 
         self._encfs = encfs = Popen([
             '../dsfs/cmake-build-debug/dsfs', '-f', '-S', '--standard',
@@ -133,7 +139,7 @@ class Sync:
         if remote_state is not None:
             for (key, file) in remote_state.files.items():
                 if key not in self._state.files:
-                    self._state.files[key] = file
+                    self._state.update_node(file.path, file.cipher)
 
         state_file.modified = False
         for (key, file) in self._state.files.items():
@@ -145,6 +151,9 @@ class Sync:
 
         self._state.freeze(self._fs_root + '/._ssrs_state')
         self._network.upload_local_block(state_file)
+
+        if self._network.get_remote_configuration('.encfs6.xml') is None:
+            self._network.upload_local_block(FileInfo('configuration', '.encfs6.xml'))
 
     def main_loop(self):
         """
@@ -178,7 +187,7 @@ class Sync:
                         self._q_queue.put(fi.path)
                     else:
                         debug('Failed decoding %s' % (cipher,))
-                        self._q_queue.put('None')
+                        self._q_queue.put('')
             except QueueEmptyError:
                 pass
 
@@ -201,7 +210,7 @@ class Sync:
         self._encfs.wait()
 
 
-def filesystem_main(command, event, query, fs_root, remote, password):
+def filesystem_main(command, event, query, fs_root, remote, password, download):
     """
     This is a bootstrap function used as main entry point for the filesystem.
     It is responsible for trying to mount the filesystem and running its main loop.
@@ -211,12 +220,13 @@ def filesystem_main(command, event, query, fs_root, remote, password):
     :param fs_root:
     :param remote:
     :param password:
+    :param download:
     :return:
     """
     filesystem = Sync(command, event, query, fs_root, remote)
 
     try:
-        fskey = filesystem.mount(password)
+        fskey = filesystem.mount(password, download)
     except Exception as e:
         event.put((False, str(e), None))
         return

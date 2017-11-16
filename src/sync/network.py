@@ -22,6 +22,17 @@ class SyncNetwork:
         self._fs_root = fs_root
         self._remote = remote
 
+    def get_remote_configuration(self, config):
+        """
+        Retrieve the remote filesystem configuration.
+        :return:
+        """
+        r = requests.get(self._remote + '/get/' + b64encode(config.encode()).decode())
+        if r.status_code is not 200:
+            return None
+
+        return r.content
+
     def sync_index(self):
         """
         Sync the current filesystem indexes with the remote.

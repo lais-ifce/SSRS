@@ -8,13 +8,18 @@ class State:
         self.lookup = {}
         self.change_queue = change
 
+    def update_node(self, path, cipher):
+        file = self.files.get(path)
+        if file is None:
+            file = FileInfo(path, cipher)
+            self.files[file.path] = file
+            self.lookup[file.cipher] = file
+        return file
+
     def open(self, path, cipher):
-        fi = self.files.get(path)
-        if fi is None:
-            self.files[path] = fi = FileInfo(path, cipher)
-            self.lookup[fi.cipher] = fi
+        f = self.update_node(path, cipher)
         # print('File', fi.path, 'of cipher', fi.cipher, 'opened')
-        fi.ref = fi.ref + 1
+        f.ref = f.ref + 1
 
     def write(self, path):
         try:
