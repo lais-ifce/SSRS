@@ -85,7 +85,7 @@ class MainWindow(Gtk.ApplicationWindow):
             if result is True:
                 self.mount_store.set_value(selected[1], 2, "Yes")
             else:
-                pass
+                self.info(self, message)
 
     def action_unmount(self, widget):
         selected = self.tree_view.get_selection().get_selected()
@@ -131,6 +131,15 @@ class MainWindow(Gtk.ApplicationWindow):
         if response == Gtk.ResponseType.YES:
             return True
         return False
+
+    @staticmethod
+    def info(parent, message):
+        dialog = Gtk.Dialog("Information", parent, 0, (Gtk.STOCK_OK, Gtk.ResponseType.OK))
+        box = dialog.get_content_area()
+        box.pack_start(Gtk.Label(message), True, True, 0)
+        dialog.show_all()
+        dialog.run()
+        dialog.destroy()
 
     def quit(self, *args):
         self.mounted_fs.destroy()

@@ -20,10 +20,13 @@ class AddDialog(Gtk.Dialog):
         self.entry_local = Gtk.Entry()
         self.button_local = Gtk.Button(stock=Gtk.STOCK_OPEN)
         self.button_local.connect("clicked", self.file_chooser)
+        # checkbox
+        self.check = Gtk.CheckButton(label="Download from remote")
         self.box_local.pack_start(self.entry_local, True, True, 0)
         self.box_local.pack_start(self.button_local, False, False, 0)
         self.box_inside.pack_start(Gtk.Label("Local Path"), True, True, 0)
         self.box_inside.pack_start(self.box_local, True, False, 0)
+        self.box_inside.pack_start(self.check, False, False, 0)
         self.box.pack_start(self.box_inside, True, True, 0)
         # setup dialog
         self.connect("response", self.eval_response)
@@ -36,7 +39,8 @@ class AddDialog(Gtk.Dialog):
                 self.parent.mount_store.append([self.entry_local.get_text(), self.entry_remote.get_text(), "No"])
                 self.parent.mount_points.append({
                     "local_path": self.entry_local.get_text(),
-                    "remote_path": self.entry_remote.get_text()
+                    "remote_path": self.entry_remote.get_text(),
+                    "download": self.check.get_active()
                 })
         self.destroy()
 
