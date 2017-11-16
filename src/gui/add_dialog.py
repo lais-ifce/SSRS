@@ -47,9 +47,11 @@ class AddDialog(Gtk.Dialog):
         :return: None
         """
         if args[1] == Gtk.ResponseType.ACCEPT:
-            if self.entry_local.get_text() != "" and self.entry_remote.get_text() != "":
+            remote = self.entry_remote.get_text()[:-1] if self.entry_remote.get_text()[-1] == "/" \
+                else self.entry_remote.get_text()
+            if self.entry_local.get_text() != "" and remote != "":
                 self.parent.mount_store.append([self.entry_local.get_text(),
-                                                self.entry_remote.get_text(),
+                                                remote,
                                                 "No",
                                                 self.check.get_active()])
                 self.parent.mount_points.append({

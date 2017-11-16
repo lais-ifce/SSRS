@@ -41,11 +41,9 @@ class SyncNetwork:
         source = os.path.join(self._fs_root, ".index")
         if os.path.exists(source):
             files = os.listdir(source)
-            # files = [x for x in files if re.fullmatch(r'([0-9a-fA-F]){32}', x) is not None]
-            remote = self._remote + "/" if self._remote[-1] != "/" else self._remote
             for f in files:
                 with open(os.path.join(source, f), "rb") as file:
-                    r = requests.put(remote + "search", files={
+                    r = requests.put(self._remote + "/search", files={
                         "index": file
                     })
                     assert r.status_code == 200

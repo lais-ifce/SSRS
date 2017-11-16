@@ -86,8 +86,7 @@ class SearchDialog(Gtk.Dialog):
             key = mounted[path]['key']
             terms = self.entry_search.get_text().split(" ")
             terms = [x.decode('utf-8') for x in hash_terms(filter_stop(normalize(terms)), key)]
-            url = mounted[path]['remote'] + '/' if mounted[path]['remote'][-1] != '/' else mounted[path]['remote']
-            r = post(url + 'search', data=json.dumps({'data': terms}),
+            r = post(mounted[path]['remote'] + '/search', data=json.dumps({'data': terms}),
                      headers={"Content-type": "application/json"})
             if "ok" in r.json().keys() and r.json()['ok']:
                 for cipher in r.json()['data']:

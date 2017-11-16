@@ -1,7 +1,5 @@
-import textract
 from hashlib import md5
 from src import config
-import time
 import os
 import logging
 import sys
@@ -12,23 +10,6 @@ LANG = {
     "EN": "en-us",
     "PT": "pt-br"
 }
-
-
-def extract(path):
-    """
-    Perform a extraction of text from a specified file
-    :param path: path to the file
-    :return: a list of terms
-    """
-    try:
-        t1 = time.time()
-        raw_data = textract.process(path)
-        debug("Extraction done in {} seconds".format(time.time()-t1))
-        data = raw_data.decode('utf-8').replace("\n", " ").split(" ")
-        return data
-    except Exception as e:
-        debug(e, True)
-        raise
 
 
 def normalize(data):
