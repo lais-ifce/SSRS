@@ -59,9 +59,10 @@ class Sync:
             os.mkdir(self._fs_low)
             if from_remote is True:
                 configuration = self._network.get_remote_configuration('.encfs6.xml')
-                if configuration is not None:
-                    with open(config, 'wb') as f:
-                        f.write(configuration)
+                if configuration is None:
+                    raise Exception('Could not retrieve remote filesystem configuration')
+                with open(config, 'wb') as f:
+                    f.write(configuration)
             else:
                 new_filesystem = True
 
