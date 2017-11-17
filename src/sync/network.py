@@ -1,4 +1,5 @@
 from src.index.tools import debug
+from src.config import *
 
 from base64 import b64encode
 
@@ -22,12 +23,15 @@ class SyncNetwork:
         self._fs_root = fs_root
         self._remote = remote
 
+        self._session = requests.Session()
+        self._session.verify = CONFIG_FOLDER + '/trusted'
+
     def get_remote_configuration(self, config):
         """
         Retrieve the remote filesystem configuration.
         :return:
         """
-        r = requests.get(self._remote + '/get/' + b64encode(config.encode()).decode())
+        r = self._session.get(self._remote + '/get/' + b64encode(config.encode()).decode())
         if r.status_code is not 200:
             return None
 
@@ -45,7 +49,7 @@ class SyncNetwork:
             remote = self._remote + "/" if self._remote[-1] != "/" else self._remote
             for f in files:
                 with open(os.path.join(source, f), "rb") as file:
-                    r = requests.put(remote + "search", files={
+                    r = self._session.put(remote + "search", files={
                         "index": file
                     })
                     assert r.status_code == 200
@@ -56,7 +60,7 @@ class SyncNetwork:
 
     def upload_local_block(self, file):
         """
-        Upload an encrypted block from the low directory to the remote server.
+        Upload an encrypted block to the remote server.
         :param file:
         :return: True if the block was uploaded, False otherwise.
         """
@@ -65,8 +69,10 @@ class SyncNetwork:
         debug('Uploading file %s' % (file.path,))
         try:
             with open(os.path.join(self._fs_low, file.cipher), 'rb') as f:
-                if requests.put(self._remote + '/put/' + block_uri, data=f).status_code is not 200:
+                req = self._session.put(self._remote + '/put/' + block_uri, data=f)
+                if req.status_code is not 200:
                     return False
+                file.hash = req.content.decode()
         except FileNotFoundError:
             return False
 
@@ -80,7 +86,7 @@ class SyncNetwork:
         """
         block_uri = b64encode(file.cipher.encode()).decode()
 
-        r = requests.get(self._remote + '/get/' + block_uri, stream=True)
+        r = self._session.get(self._remote + '/get/' + block_uri, stream=True)
         if r.status_code is not 200:
             return False
 

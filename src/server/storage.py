@@ -4,6 +4,7 @@ import os
 from concurrent.futures import ThreadPoolExecutor
 
 from tempfile import TemporaryFile
+from hashlib import md5
 
 executor = ThreadPoolExecutor(2)
 
@@ -45,8 +46,11 @@ class PUTHandler(tornado.web.RequestHandler):
             os.mkdir(repo)
         with open(os.path.join(repo, filename), 'wb') as f:
             self.temp_file.seek(0)
+            content_hash = md5()
             while True:
                 data = yield executor.submit(self.temp_file.read, 1024**2)
                 if len(data) == 0:
                     break
+                content_hash.update(data)
                 yield executor.submit(f.write, data)
+            self.write(content_hash.hexdigest())

@@ -6,3 +6,4 @@ class FileInfo:
         self.modified = modified
         self.written = False
         self.ref = 0
+        self.hash = None

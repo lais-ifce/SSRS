@@ -138,17 +138,21 @@ class Sync:
 
         remote_state = self.load_remote_state(state_file)
         if remote_state is not None:
-            for (key, file) in remote_state.files.items():
+            for (key, remote) in remote_state.files.items():
                 if key not in self._state.files:
-                    self._state.update_node(file.path, file.cipher)
+                    self._state.update_node(remote.path, remote.cipher)
 
         state_file.modified = False
-        for (key, file) in self._state.files.items():
-            if file.modified is True:
-                self._network.upload_local_block(file)
-                file.modified = False
+        for (key, local) in self._state.files.items():
+            if local.modified is True:
+                self._network.upload_local_block(local)
+                local.modified = False
             else:
-                self._network.download_remote_block(file)
+                remote = None if remote_state is None else remote_state.files.get(key)
+                if remote is not None:
+                    if local.hash != remote.hash:
+                        self._network.download_remote_block(local)
+                        local.hash = remote.hash
 
         self._state.freeze(self._fs_root + '/._ssrs_state')
         self._network.upload_local_block(state_file)
