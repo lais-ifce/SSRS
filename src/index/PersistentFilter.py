@@ -4,6 +4,7 @@ from math import ceil, log
 from base64 import b64encode
 import pickle
 import time
+import textract
 
 
 class PersistentFilter(Filter):
@@ -21,13 +22,30 @@ class PersistentFilter(Filter):
 
         super(PersistentFilter, self).__init__()
 
-        self.data = hash_terms(filter_stop(normalize(extract(plain_path)), lang), key)
+        self.data = hash_terms(filter_stop(normalize(self.extract(plain_path)), lang), key)
         self.false_positive = false
         self.len_filter = 0
         self.num_hash = 0
         self.filter = 0
         self.path = plain_path
         self.enc_path = enc_path
+
+    @staticmethod
+    def extract(path):
+        """
+        Perform a extraction of text from a specified file
+        :param path: path to the file
+        :return: a list of terms
+        """
+        try:
+            t1 = time.time()
+            raw_data = textract.process(path)
+            debug("Extraction done in {} seconds".format(time.time()-t1))
+            data = raw_data.decode('utf-8').replace("\n", " ").split(" ")
+            return data
+        except Exception as e:
+            debug(e, True)
+            raise
 
     def calc(self):
         """
@@ -81,6 +99,13 @@ class PersistentFilter(Filter):
 
 
 def index_loop(command, fs_root, key):
+    """
+    File system indexer
+    :param command: 3-tuple with event id, path to file and ecrypted path
+    :param fs_root: file system root
+    :param key: user key
+    :return: None
+    """
     while True:
         ev, path, enc_path = command.get()
         if ev == 1:

@@ -4,7 +4,14 @@ from gi.repository import Gtk
 
 
 class AddDialog(Gtk.Dialog):
+    """
+    Class that extends Gtk Dialog
+    """
     def __init__(self, parent):
+        """
+        Contructor
+        :param parent: Gtk parent window
+        """
         Gtk.Dialog.__init__(self, "Add mount point", parent, 0, (Gtk.STOCK_ADD, Gtk.ResponseType.ACCEPT,
                                                                  Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
         self.parent = parent
@@ -34,10 +41,17 @@ class AddDialog(Gtk.Dialog):
         self.run()
 
     def eval_response(self, *args):
+        """
+        Evaluate response from dialog
+        :param args: Gtk args
+        :return: None
+        """
         if args[1] == Gtk.ResponseType.ACCEPT:
-            if self.entry_local.get_text() != "" and self.entry_remote.get_text() != "":
+            remote = self.entry_remote.get_text()[:-1] if self.entry_remote.get_text()[-1] == "/" \
+                else self.entry_remote.get_text()
+            if self.entry_local.get_text() != "" and remote != "":
                 self.parent.mount_store.append([self.entry_local.get_text(),
-                                                self.entry_remote.get_text(),
+                                                remote,
                                                 "No",
                                                 self.check.get_active()])
                 self.parent.mount_points.append({
@@ -48,6 +62,11 @@ class AddDialog(Gtk.Dialog):
         self.destroy()
 
     def file_chooser(self, *args):
+        """
+        File chooser dialog
+        :param args: Gtk args
+        :return: None
+        """
         dialog = Gtk.FileChooserDialog("Choose a folder", self, Gtk.FileChooserAction.SELECT_FOLDER,
                                        (Gtk.STOCK_OPEN, Gtk.ResponseType.OK, Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
         response = dialog.run()

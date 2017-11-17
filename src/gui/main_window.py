@@ -10,7 +10,13 @@ import os
 
 
 class MainWindow(Gtk.ApplicationWindow):
+    """
+    Class that extends Gtk application windows and is the base window
+    """
     def __init__(self):
+        """
+        Constructor
+        """
         Gtk.ApplicationWindow.__init__(self, title="SRSS")
         # setup window
         self.set_default_size(800, 600)
@@ -65,9 +71,19 @@ class MainWindow(Gtk.ApplicationWindow):
             self.mount_points = []
 
     def action_add(self, widget):
+        """
+        Action to add a mount point
+        :param widget: Gtk Widget
+        :return: None
+        """
         AddDialog(self)
 
     def action_rem(self, widget):
+        """
+        Action to remove an mount point
+        :param widget: Gtk widget
+        :return: None
+        """
         selected = self.tree_view.get_selection().get_selected()
         if self.confirm(self, "You really want remove this mount point?") and selected[1] is not None:
             for i in range(0, len(self.mount_points)):
@@ -76,6 +92,11 @@ class MainWindow(Gtk.ApplicationWindow):
             self.mount_store.remove(selected[1])
 
     def action_mount(self, widget):
+        """
+        Mount a previously added mount point
+        :param widget: Gtk widget
+        :return: None
+        """
         selected = self.tree_view.get_selection().get_selected()
         senha = self.get_password(self)
         local = self.mount_store.get_value(selected[1], 0)
@@ -89,14 +110,29 @@ class MainWindow(Gtk.ApplicationWindow):
                 self.info(self, message)
 
     def action_unmount(self, widget):
+        """
+        Unmount a previously mounted mount point
+        :param widget: Gtk Widget
+        :return: None
+        """
         selected = self.tree_view.get_selection().get_selected()
         if self.mounted_fs.unmount(self.mount_store.get_value(selected[1], 0)):
             self.mount_store.set_value(selected[1], 2, "No")
 
     def action_search(self, widget):
+        """
+        Trig the search dialog for all mounted mount points
+        :param widget: Gtk Widget
+        :return: None
+        """
         SearchDialog(self)
 
     def action_sync(self, widget):
+        """
+        Trig the sync task for the selected mount point
+        :param widget:
+        :return:
+        """
         selected = self.tree_view.get_selection().get_selected()
         if self.confirm(self, "Really want sync this repository?"):
             local = self.mount_store.get_value(selected[1], 0)
@@ -105,6 +141,11 @@ class MainWindow(Gtk.ApplicationWindow):
 
     @staticmethod
     def get_password(parent):
+        """
+        Dialog to ask for a password
+        :param parent: Gtk parent window
+        :return: password or empty string
+        """
         dialog = Gtk.Dialog("Password", parent, 0, (Gtk.STOCK_OK, Gtk.ResponseType.OK,
                                                     Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
         box = dialog.get_content_area()
@@ -122,6 +163,12 @@ class MainWindow(Gtk.ApplicationWindow):
 
     @staticmethod
     def confirm(parent, message):
+        """
+        Confirmation dialog
+        :param parent: Gtk parent window
+        :param message: message to be showed
+        :return: True or False
+        """
         dialog = Gtk.Dialog("Confirmation", parent, 0, (Gtk.STOCK_YES, Gtk.ResponseType.YES,
                                                         Gtk.STOCK_NO, Gtk.ResponseType.NO))
         box = dialog.get_content_area()
@@ -135,6 +182,12 @@ class MainWindow(Gtk.ApplicationWindow):
 
     @staticmethod
     def info(parent, message):
+        """
+        Information dialog
+        :param parent: Gtk parent window
+        :param message: info message to be showed
+        :return: None
+        """
         dialog = Gtk.Dialog("Information", parent, 0, (Gtk.STOCK_OK, Gtk.ResponseType.OK))
         box = dialog.get_content_area()
         box.pack_start(Gtk.Label(message), True, True, 0)
@@ -143,6 +196,11 @@ class MainWindow(Gtk.ApplicationWindow):
         dialog.destroy()
 
     def quit(self, *args):
+        """
+        Perform operations to safe exit
+        :param args: Gtk args
+        :return: None
+        """
         self.mounted_fs.destroy()
         if not os.path.exists(CONFIG_FOLDER):
             os.mkdir(CONFIG_FOLDER)
