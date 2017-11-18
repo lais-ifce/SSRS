@@ -44,6 +44,20 @@ class PUTHandler(tornado.web.RequestHandler):
     def put(self, repo, filename):
         if not os.path.exists(repo):
             os.mkdir(repo)
+            try:
+                with open(os.path.join(repo, 'key'), 'w') as f:
+                    f.write(self.request.headers['X-SSRS-KEY'])
+            except KeyError:
+                os.rmdir(repo)
+                raise tornado.web.HTTPError(401)
+
+        with open(os.path.join(repo, 'key')) as f:
+            try:
+                if f.read() != self.request.headers['X-SSRS-KEY']:
+                    raise tornado.web.HTTPError(403)
+            except KeyError:
+                raise tornado.web.HTTPError(401)
+
         with open(os.path.join(repo, filename), 'wb') as f:
             self.temp_file.seek(0)
             content_hash = md5()

@@ -97,3 +97,10 @@ class SyncNetwork:
 
         return True
 
+    def set_remote_key(self, key):
+        """
+        Set the key to be used when authenticating with the remote server.
+        :param key:
+        :return:
+        """
+        self._session.headers['X-SSRS-KEY'] = key
