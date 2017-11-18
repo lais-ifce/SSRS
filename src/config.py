@@ -10,7 +10,7 @@ SERVER_PORT = 8080
 
 SERVER_IP = '127.0.0.1'
 
-INDEX_ROOT = path.expanduser("~/.config/ssrs/index")
+INDEX_ROOT = path.join(CONFIG_FOLDER, "index")
 
 PROTOCOL = "http://"
 

@@ -1,4 +1,5 @@
 from src.index.tools import *
+from src.config import CONFIG_FOLDER
 import subprocess
 from requests import post
 from base64 import b64decode
@@ -87,7 +88,7 @@ class SearchDialog(Gtk.Dialog):
             terms = self.entry_search.get_text().split(" ")
             terms = [x.decode('utf-8') for x in hash_terms(filter_stop(normalize(terms)), key)]
             r = post(mounted[path]['remote'] + '/search', data=json.dumps({'data': terms}),
-                     headers={"Content-type": "application/json"}, verify=False)
+                     headers={"Content-type": "application/json"}, verify=CONFIG_FOLDER+'/trusted')
             if "ok" in r.json().keys() and r.json()['ok']:
                 for cipher in r.json()['data']:
                     mounted[path]['cmd'].put((3, b64decode(cipher.encode()).decode()))
