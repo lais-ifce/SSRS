@@ -42,7 +42,7 @@ class SyncNetwork:
         Sync the current filesystem indexes with the remote.
         :return:
         """
-        source = os.path.join(self._fs_root, ".index")
+        source = os.path.join(INDEX_ROOT, b64encode(self._fs_root.encode()).decode())
         if os.path.exists(source):
             files = os.listdir(source)
             for f in files:

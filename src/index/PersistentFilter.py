@@ -1,5 +1,6 @@
 from src.index.Filter import Filter
 from src.index.tools import *
+from src.config import *
 from math import ceil, log
 from base64 import b64encode
 import pickle
@@ -108,19 +109,20 @@ def index_loop(command, fs_root, key):
     """
     while True:
         ev, path, enc_path = command.get()
+        repo = b64encode(fs_root.encode()).decode()
         if ev == 1:
             debug("Exiting")
             break
-        if not os.path.exists(os.path.join(fs_root, ".index")):
+        if not os.path.exists(os.path.join(INDEX_ROOT, repo)):
             try:
-                os.mkdir(os.path.join(fs_root, ".index"))
+                os.mkdir(os.path.join(INDEX_ROOT, repo))
             except Exception as e:
                 debug(e, True)
                 raise
-        print("path:", path)
-        print("fsroot", fs_root)
+        debug("path:", path)
+        debug("fsroot", fs_root)
         path = path[1:] if path[0] == "/" else path
-        enc_path = os.path.join(fs_root, ".index/", b64encode(enc_path.encode()).decode())
+        enc_path = os.path.join(INDEX_ROOT, repo, b64encode(enc_path.encode()).decode())
         if not os.path.basename(os.path.abspath(os.path.join(fs_root, path))).startswith(".") and ".index/" not in path:
             pf = PersistentFilter(os.path.join(fs_root, path), enc_path, key)
             assert pf.build_filter()
