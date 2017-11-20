@@ -15,3 +15,5 @@ INDEX_ROOT = path.join(CONFIG_FOLDER, "index")
 PROTOCOL = "http://"
 
 BASE_URL = PROTOCOL + SERVER_IP + ":" + str(SERVER_PORT)
+
+S3BUCKET = ''
