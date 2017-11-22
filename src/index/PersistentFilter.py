@@ -42,7 +42,7 @@ class PersistentFilter(Filter):
             t1 = time.time()
             raw_data = textract.process(path)
             debug("Extraction done in {} seconds".format(time.time()-t1))
-            data = raw_data.decode('utf-8').replace("\n", " ").split(" ")
+            data = [x for x in raw_data.decode().replace("\n", " ").split(" ") if x is not ""]
             return data
         except Exception as e:
             debug(e, True)
@@ -119,8 +119,8 @@ def index_loop(command, fs_root, key):
             except Exception as e:
                 debug(e, True)
                 raise
-        debug("path:", path)
-        debug("fsroot", fs_root)
+        debug("path: " + path)
+        debug("fsroot: " + fs_root)
         path = path[1:] if path[0] == "/" else path
         enc_path = os.path.join(INDEX_ROOT, repo, b64encode(enc_path.encode()).decode())
         if not os.path.basename(os.path.abspath(os.path.join(fs_root, path))).startswith(".") and ".index/" not in path:
