@@ -1,9 +1,17 @@
 
 class FileInfo:
-    def __init__(self, path, cipher, modified=False):
+    """
+    Represents the state of a file.
+    """
+    def __init__(self, path, cipher):
+        """
+        Construct a new file state.
+        :param path:
+        :param cipher:
+        """
         self.path = path
         self.cipher = cipher
-        self.modified = modified
+        self.modified = False
         self.written = False
         self.ref = 0
         self.hash = None

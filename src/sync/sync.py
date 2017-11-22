@@ -106,7 +106,7 @@ class Sync:
         if fskey is None:
             raise Exception('Could not initialize filesystem driver')
 
-        # self._event_queue.put(fskey)
+        self._network.set_remote_key(fskey)
 
         debug('Filesystem private key is %s' % (fskey,))
         debug('Restoring filesystem state')
