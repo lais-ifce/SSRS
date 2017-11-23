@@ -23,7 +23,7 @@ class PersistentFilter(Filter):
 
         super(PersistentFilter, self).__init__()
 
-        self.data = hash_terms(filter_stop(normalize(self.extract(plain_path)), lang), key)
+        self.data = hash_terms(filter_stop(normalize(plain_path), lang), key)
         self.false_positive = false
         self.len_filter = 0
         self.num_hash = 0
@@ -76,7 +76,10 @@ class PersistentFilter(Filter):
             for t in self.data:
                 for i in self.prepare_term(t, self.len_filter, self.num_hash):
                     self.filter |= (1 << i)
+            t = time.time()-t1
             debug("Filter Built in {} seconds".format(time.time()-t1))
+            with open("./results.txt", "a") as f:
+                f.write("({}, {})\n".format(len(self.data), t))
             return True
         except Exception as e:
             debug(e, True)
