@@ -122,7 +122,7 @@ def index_loop(command, fs_root, key):
         debug("path:", path)
         debug("fsroot", fs_root)
         path = path[1:] if path[0] == "/" else path
-        enc_path = os.path.join(INDEX_ROOT, repo, b64encode(enc_path.encode()).decode())
+        enc_path = os.path.join(INDEX_ROOT, repo, enc_path)
         if not os.path.basename(os.path.abspath(os.path.join(fs_root, path))).startswith(".") and ".index/" not in path:
             pf = PersistentFilter(os.path.join(fs_root, path), enc_path, key)
             assert pf.build_filter()

@@ -91,6 +91,6 @@ class SearchDialog(Gtk.Dialog):
                      headers={"Content-type": "application/json"}, verify=CONFIG_FOLDER+'/trusted')
             if "ok" in r.json().keys() and r.json()['ok']:
                 for cipher in r.json()['data']:
-                    mounted[path]['cmd'].put((3, b64decode(cipher.encode()).decode()))
+                    mounted[path]['cmd'].put((3, cipher))
                     item = mounted[path]['q'].get().split('/')[-1]
                     self.store_search.append([item, os.path.join(mounted[path]['path'], item)])

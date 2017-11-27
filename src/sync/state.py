@@ -1,4 +1,5 @@
 from src.sync.file import FileInfo
+
 import pickle
 
 
@@ -30,7 +31,7 @@ class State:
         if file is None:
             file = FileInfo(path, cipher)
             self.files[file.path] = file
-            self.lookup[file.cipher] = file
+            self.lookup[file.lookup] = file
         return file
 
     def open(self, path, cipher):
@@ -69,7 +70,7 @@ class State:
             fi.ref = fi.ref - 1
             if fi.ref == 0 and fi.written is True:
                 # print('File',path,'of cipher',f.path_cipher,'closed')
-                self.change_queue.put((2, fi.path, fi.cipher,))
+                self.change_queue.put((2, fi.path, fi.lookup,))
                 fi.written = False
         except KeyError:
             print('Invalid file for close operation')
@@ -96,7 +97,7 @@ class State:
             with open(path, 'rb') as f:
                 self.files = pickle.load(f)
                 for file in self.files.values():
-                    self.lookup[file.cipher] = file
+                    self.lookup[file.lookup] = file
         except FileNotFoundError:
             # state does not exist yet, create one
             self.freeze(path)

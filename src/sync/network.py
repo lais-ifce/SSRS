@@ -1,6 +1,7 @@
 from src.index.tools import debug
 from src.config import *
 
+from hashlib import md5
 from base64 import b64encode
 
 import requests
@@ -31,7 +32,7 @@ class SyncNetwork:
         Retrieve the remote filesystem configuration.
         :return:
         """
-        r = self._session.get(self._remote + '/get/' + b64encode(config.encode()).decode())
+        r = self._session.get(self._remote + '/get/' + md5(config.encode()).hexdigest())
         if r.status_code is not 200:
             return None
 
@@ -62,7 +63,7 @@ class SyncNetwork:
         :param file:
         :return: True if the block was uploaded, False otherwise.
         """
-        block_uri = b64encode(file.cipher.encode()).decode()
+        block_uri = file.lookup
 
         debug('Uploading file %s' % (file.path,))
         try:
@@ -82,7 +83,7 @@ class SyncNetwork:
         :param file:
         :return: True if the block was downloaded, False otherwise
         """
-        block_uri = b64encode(file.cipher.encode()).decode()
+        block_uri = file.lookup
 
         r = self._session.get(self._remote + '/get/' + block_uri, stream=True)
         if r.status_code is not 200:

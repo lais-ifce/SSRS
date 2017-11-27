@@ -1,3 +1,5 @@
+from hashlib import md5
+
 
 class FileInfo:
     """
@@ -15,3 +17,4 @@ class FileInfo:
         self.written = False
         self.ref = 0
         self.hash = None
+        self.lookup = md5(self.cipher.encode()).hexdigest()
