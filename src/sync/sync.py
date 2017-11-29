@@ -188,6 +188,10 @@ class Sync:
                 elif message[0] == 3:
                     cipher = message[1]
                     fi = self._state.lookup.get(cipher)
+                    if fi is None:
+                        remote_state = self.load_remote_state(self._state.files['/._ssrs_state'])
+                        if remote_state is not None:
+                            fi = remote_state.lookup.get(cipher)
                     if fi is not None:
                         self._q_queue.put(fi.path)
                     else:
