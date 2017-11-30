@@ -1,19 +1,15 @@
-from src.sync.event import Event
-from src.sync.state import State
-from src.sync.network import SyncNetwork
-from src.index.tools import debug
-
-from src.sync.file import FileInfo
-
-from subprocess import Popen, PIPE
-
+import os
 from hashlib import md5, sha256
-
 from queue import Empty as QueueEmptyError
-
+from subprocess import Popen, PIPE
 from time import sleep
 
-import os
+from client.sync.event import Event
+from client.sync.file import FileInfo
+from client.sync.network import SyncNetwork
+
+from client.index.tools import debug
+from client.sync.state import State
 
 
 class Sync:
@@ -66,8 +62,10 @@ class Sync:
             else:
                 new_filesystem = True
 
+        print(os.system("pwd"))
+
         self._encfs = encfs = Popen([
-            '../dsfs/cmake-build-debug/dsfs', '-f', '-S', '--standard',
+            'client/dsfs/cmake-build-debug/dsfs', '-f', '-S', '--standard',
             self._fs_low,
             self._fs_root],
             stdin=PIPE)

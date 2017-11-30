@@ -1,6 +1,6 @@
-from src.sync.file import FileInfo
-
 import pickle
+
+from client.sync.file import FileInfo
 
 
 class State:

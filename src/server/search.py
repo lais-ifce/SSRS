@@ -1,8 +1,10 @@
-import tornado.web
 import json
-from src.index.QueryFilter import QueryFilter
-from src.config import *
 import os
+
+import tornado.web
+
+from server.QueryFilter import QueryFilter
+from config import *
 
 
 class SearchHandler(tornado.web.RequestHandler):

@@ -1,10 +1,12 @@
-from src.index.tools import *
-from src.config import CONFIG_FOLDER
-import subprocess
-from requests import post
-from base64 import b64decode
 import json
+import subprocess
+
 import gi
+from requests import post
+
+from client.index.tools import *
+from config import CONFIG_FOLDER
+
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk
 

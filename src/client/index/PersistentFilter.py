@@ -1,11 +1,13 @@
-from src.index.Filter import Filter
-from src.index.tools import *
-from src.config import *
-from math import ceil, log
-from base64 import b64encode
 import pickle
 import time
+from base64 import b64encode
+from math import ceil, log
+
 import textract
+from common.Filter import Filter
+
+from client.index.tools import *
+from config import *
 
 
 class PersistentFilter(Filter):

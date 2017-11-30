@@ -1,4 +1,4 @@
-from src.config import *
+from config import *
 from os import path, makedirs
 
 if not path.exists(CONFIG_FOLDER):

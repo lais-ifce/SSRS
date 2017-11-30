@@ -1,5 +1,5 @@
 from hashlib import md5
-from src import config
+import config
 import os
 import logging
 import sys

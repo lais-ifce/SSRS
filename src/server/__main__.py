@@ -1,9 +1,9 @@
 import tornado.web
 
-from src.config import *
+from config import *
 
-from src.server.search import SearchHandler
-from src.server.storage import GETHandler, PUTHandler
+from server.search import SearchHandler
+from server.storage import GETHandler, PUTHandler
 
 
 if __name__ == "__main__":

@@ -1,10 +1,10 @@
 import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
-from src.gui.search_dialog import SearchDialog
-from src.gui.add_dialog import AddDialog
-from src.gui.Manage import Manage
-from src.config import *
+from client.gui.search_dialog import SearchDialog
+from client.gui.add_dialog import AddDialog
+from client.gui.Manage import Manage
+from config import *
 import pickle
 import os
 
@@ -208,9 +208,12 @@ class MainWindow(Gtk.ApplicationWindow):
             pickle.dump(self.mount_points, f)
         Gtk.main_quit(args)
 
+    def main(self):
+        self.connect("delete-event", self.quit)
+        self.show_all()
+        Gtk.main()
+
 
 if __name__ == "__main__":
     main = MainWindow()
-    main.connect("delete-event", main.quit)
-    main.show_all()
-    Gtk.main()
+    main.main()

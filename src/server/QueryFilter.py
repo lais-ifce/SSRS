@@ -1,9 +1,11 @@
-from src.index.Filter import Filter
-from src.index.tools import debug
-from src.config import *
 import os
 import pickle
 import time
+
+from common.Filter import Filter
+
+from client.index.tools import debug
+from config import *
 
 
 class QueryFilter(Filter):

@@ -1,6 +1,7 @@
-from src.sync.sync import filesystem_main
-from src.index.PersistentFilter import index_loop
 from multiprocessing import Process, Queue
+
+from client.index.PersistentFilter import index_loop
+from client.sync.sync import filesystem_main
 
 
 class Manage:

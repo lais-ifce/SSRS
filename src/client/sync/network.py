@@ -1,11 +1,11 @@
-from src.index.tools import debug
-from src.config import *
-
-from hashlib import md5
+import os
 from base64 import b64encode
+from hashlib import md5
 
 import requests
-import os
+
+from client.index.tools import debug
+from config import *
 
 
 class SyncNetwork:
