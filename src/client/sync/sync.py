@@ -65,7 +65,7 @@ class Sync:
         print(os.system("pwd"))
 
         self._encfs = encfs = Popen([
-            'client/dsfs/cmake-build-debug/dsfs', '-f', '-S', '--standard',
+            'client/dsfs/build/dsfs', '-f', '-S', '--standard',
             self._fs_low,
             self._fs_root],
             stdin=PIPE)
