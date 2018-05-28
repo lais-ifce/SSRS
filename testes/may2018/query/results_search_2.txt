@@ -1,0 +1,324 @@
+INFO:root:Normalized 5 terms
+INFO:root:Remove duplicate: Before -> 5 / After -> 5
+INFO:root:Stopwords filter result: 5 terms
+['548a5d6c4081f0065a0106dabf74ff84', '8ce4e2e75863c80ee64aa20c847893dd', 'f6888d8146ef6c322748cab63d1a4012', '328b7036ab5cd0a7659992fc4ba471bc', 'fd9d2152a485a086e3018d0c448d3c01']
+Filtro >> a
+Round >> 1
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00013899803161621094 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00015616416931152344 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00018715858459472656 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0002155303955078125 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.00024390220642089844 seconds
+Round >> 2
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00011873245239257812 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00014734268188476562 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.0002334117889404297 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0002105236053466797 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.00024366378784179688 seconds
+Round >> 3
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00011730194091796875 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.0001804828643798828 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.0001761913299560547 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.00020742416381835938 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5
+INFO:root:Filter /home/wsantos/washington/a/e74b47b97c9a4b6fc2e8b880a3dec4f5 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.00024175643920898438 seconds
+Filtro >> b
+Round >> 1
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00012683868408203125 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00015807151794433594 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00019860267639160156 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0002276897430419922 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.00026988983154296875 seconds
+Round >> 2
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.0001251697540283203 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00015687942504882812 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00019216537475585938 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.00022602081298828125 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.00026035308837890625 seconds
+Round >> 3
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00012183189392089844 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00015544891357421875 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00019025802612304688 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0002262592315673828 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7
+INFO:root:Filter /home/wsantos/washington/b/ac328acf9548a432ed057fe023d0b6c7 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0002624988555908203 seconds
+Filtro >> c
+Round >> 1
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00015401840209960938 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00021839141845703125 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00022745132446289062 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.00031256675720214844 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0003368854522705078 seconds
+Round >> 2
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00013971328735351562 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00018215179443359375 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00021719932556152344 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0002589225769042969 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.000301361083984375 seconds
+Round >> 3
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.0001361370086669922 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.0001766681671142578 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.0002295970916748047 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.00026535987854003906 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357
+INFO:root:Filter /home/wsantos/washington/c/98bfd8da4b55fb834468a4bc9e039357 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0003032684326171875 seconds
+Filtro >> d
+Round >> 1
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.0001766681671142578 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.0003590583801269531 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.0002865791320800781 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.00034499168395996094 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0003924369812011719 seconds
+Round >> 2
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00016236305236816406 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00023102760314941406 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.0002779960632324219 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.00033664703369140625 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0004203319549560547 seconds
+Round >> 3
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.0002455711364746094 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00026416778564453125 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.0004181861877441406 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0005173683166503906 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6
+INFO:root:Filter /home/wsantos/washington/d/fa075d3c21b67303a3c5557f85ccbed6 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0004482269287109375 seconds
+Filtro >> e
+Round >> 1
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.0002503395080566406 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.0003132820129394531 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.0006899833679199219 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0006875991821289062 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0007412433624267578 seconds
+Round >> 2
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.0002307891845703125 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00030994415283203125 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00043129920959472656 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0005080699920654297 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0005688667297363281 seconds
+Round >> 3
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00023055076599121094 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.0003139972686767578 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00039505958557128906 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0004825592041015625 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2
+INFO:root:Filter /home/wsantos/washington/e/81048db9fc56cc8e21a31542d9c4abc2 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0005755424499511719 seconds

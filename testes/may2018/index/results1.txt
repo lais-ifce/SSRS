@@ -1,0 +1,41 @@
+>>> test(500)
+INFO:root:Extraction done in 0.020941495895385742 seconds
+INFO:root:Normalized 500 terms
+INFO:root:Remove duplicate: Before -> 500 / After -> 500
+INFO:root:Stopwords filter result: 500 terms
+INFO:root:Filter Built in 0.018718481063842773 seconds
+INFO:root:Filter stored with 500 terms, 20 hash functions, 14378 bits
+0.04277348518371582
+>>> test(1000)
+INFO:root:Extraction done in 0.020369768142700195 seconds
+INFO:root:Normalized 999 terms
+INFO:root:Remove duplicate: Before -> 999 / After -> 999
+INFO:root:Stopwords filter result: 999 terms
+INFO:root:Filter Built in 0.039398193359375 seconds
+INFO:root:Filter stored with 999 terms, 20 hash functions, 28727 bits
+0.06443119049072266
+>>> test(2000)
+INFO:root:Extraction done in 0.027472257614135742 seconds
+INFO:root:Normalized 1997 terms
+INFO:root:Remove duplicate: Before -> 1997 / After -> 1997
+INFO:root:Stopwords filter result: 1997 terms
+INFO:root:Filter Built in 0.09334111213684082 seconds
+INFO:root:Filter stored with 1997 terms, 20 hash functions, 57425 bits
+0.12937092781066895
+>>> test(4000)
+INFO:root:Extraction done in 0.03423595428466797 seconds
+INFO:root:Normalized 3993 terms
+INFO:root:Remove duplicate: Before -> 3993 / After -> 3993
+INFO:root:Stopwords filter result: 3993 terms
+INFO:root:Filter Built in 0.24456119537353516 seconds
+INFO:root:Filter stored with 3993 terms, 20 hash functions, 114820 bits
+0.29438352584838867
+>>> test(8000)
+INFO:root:Extraction done in 0.0501551628112793 seconds
+INFO:root:Normalized 7985 terms
+INFO:root:Remove duplicate: Before -> 7985 / After -> 7985
+INFO:root:Stopwords filter result: 7985 terms
+INFO:root:Filter Built in 0.73368239402771 seconds
+INFO:root:Filter stored with 7985 terms, 20 hash functions, 229611 bits
+0.8135988712310791
+

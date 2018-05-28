@@ -1,0 +1,109 @@
+R1
+INFO:root:Search with 1 terms in 1 filters performed in 0.0012497901916503906 seconds
+INFO:root:Search with 2 terms in 1 filters performed in 0.0008375644683837891 seconds
+INFO:root:Search with 3 terms in 1 filters performed in 0.0012257099151611328 seconds
+INFO:root:Search with 4 terms in 1 filters performed in 0.0018885135650634766 seconds
+INFO:root:Search with 5 terms in 1 filters performed in 0.0016770362854003906 seconds
+
+R2
+INFO:root:Search with 1 terms in 1 filters performed in 0.0007407665252685547 seconds
+INFO:root:Search with 2 terms in 1 filters performed in 0.0007672309875488281 seconds
+INFO:root:Search with 3 terms in 1 filters performed in 0.001190185546875 seconds
+INFO:root:Search with 4 terms in 1 filters performed in 0.0011641979217529297 seconds
+INFO:root:Search with 5 terms in 1 filters performed in 0.001069784164428711 seconds
+
+R3
+INFO:root:Search with 1 terms in 1 filters performed in 0.0006203651428222656 seconds
+INFO:root:Search with 2 terms in 1 filters performed in 0.0007982254028320312 seconds
+INFO:root:Search with 3 terms in 1 filters performed in 0.0013012886047363281 seconds
+INFO:root:Search with 4 terms in 1 filters performed in 0.0012085437774658203 seconds
+INFO:root:Search with 5 terms in 1 filters performed in 0.0018432140350341797 seconds
+
+R1
+INFO:root:Search with 1 terms in 2 filters performed in 0.0013995170593261719 seconds
+INFO:root:Search with 2 terms in 2 filters performed in 0.0018413066864013672 seconds
+INFO:root:Search with 3 terms in 2 filters performed in 0.0018744468688964844 seconds
+INFO:root:Search with 4 terms in 2 filters performed in 0.0038022994995117188 seconds
+INFO:root:Search with 5 terms in 2 filters performed in 0.003734588623046875 seconds
+
+R2
+INFO:root:Search with 1 terms in 2 filters performed in 0.0023670196533203125 seconds
+INFO:root:Search with 2 terms in 2 filters performed in 0.0022711753845214844 seconds
+INFO:root:Search with 3 terms in 2 filters performed in 0.002908945083618164 seconds
+INFO:root:Search with 4 terms in 2 filters performed in 0.0036513805389404297 seconds
+INFO:root:Search with 5 terms in 2 filters performed in 0.003876209259033203 seconds
+
+R3
+INFO:root:Search with 1 terms in 2 filters performed in 0.0017790794372558594 seconds
+INFO:root:Search with 2 terms in 2 filters performed in 0.0022344589233398438 seconds
+INFO:root:Search with 3 terms in 2 filters performed in 0.0029582977294921875 seconds
+INFO:root:Search with 4 terms in 2 filters performed in 0.0039293766021728516 seconds
+INFO:root:Search with 5 terms in 2 filters performed in 0.003869771957397461 seconds
+
+R1
+INFO:root:Search with 1 terms in 3 filters performed in 0.00235748291015625 seconds
+INFO:root:Search with 2 terms in 3 filters performed in 0.0029144287109375 seconds
+INFO:root:Search with 3 terms in 3 filters performed in 0.0031821727752685547 seconds
+INFO:root:Search with 4 terms in 3 filters performed in 0.0049707889556884766 seconds
+INFO:root:Search with 5 terms in 3 filters performed in 0.004364013671875 seconds
+
+R2
+INFO:root:Search with 1 terms in 3 filters performed in 0.0027894973754882812 seconds
+INFO:root:Search with 2 terms in 3 filters performed in 0.0035703182220458984 seconds
+INFO:root:Search with 3 terms in 3 filters performed in 0.0043489933013916016 seconds
+INFO:root:Search with 4 terms in 3 filters performed in 0.006444692611694336 seconds
+INFO:root:Search with 5 terms in 3 filters performed in 0.006645679473876953 seconds
+
+R3
+INFO:root:Search with 1 terms in 3 filters performed in 0.0026574134826660156 seconds
+INFO:root:Search with 2 terms in 3 filters performed in 0.003749847412109375 seconds
+INFO:root:Search with 3 terms in 3 filters performed in 0.004464387893676758 seconds
+INFO:root:Search with 4 terms in 3 filters performed in 0.0052144527435302734 seconds
+INFO:root:Search with 5 terms in 3 filters performed in 0.005791664123535156 seconds
+
+R1
+INFO:root:Search with 1 terms in 4 filters performed in 0.003289937973022461 seconds
+INFO:root:Search with 2 terms in 4 filters performed in 0.004894733428955078 seconds
+INFO:root:Search with 3 terms in 4 filters performed in 0.004384279251098633 seconds
+INFO:root:Search with 4 terms in 4 filters performed in 0.0038030147552490234 seconds
+INFO:root:Search with 5 terms in 4 filters performed in 0.006219625473022461 seconds
+
+
+R2
+INFO:root:Search with 1 terms in 4 filters performed in 0.0038013458251953125 seconds
+INFO:root:Search with 2 terms in 4 filters performed in 0.005612373352050781 seconds
+INFO:root:Search with 3 terms in 4 filters performed in 0.006091117858886719 seconds
+INFO:root:Search with 4 terms in 4 filters performed in 0.0077779293060302734 seconds
+INFO:root:Search with 5 terms in 4 filters performed in 0.008965492248535156 seconds
+
+
+R3
+INFO:root:Search with 1 terms in 4 filters performed in 0.003925323486328125 seconds
+INFO:root:Search with 2 terms in 4 filters performed in 0.004886627197265625 seconds
+INFO:root:Search with 3 terms in 4 filters performed in 0.0060672760009765625 seconds
+INFO:root:Search with 4 terms in 4 filters performed in 0.007239580154418945 seconds
+INFO:root:Search with 5 terms in 4 filters performed in 0.008592605590820312 seconds
+
+
+R1
+INFO:root:Search with 1 terms in 5 filters performed in 0.0051364898681640625 seconds
+INFO:root:Search with 2 terms in 5 filters performed in 0.005990743637084961 seconds
+INFO:root:Search with 3 terms in 5 filters performed in 0.006391286849975586 seconds
+INFO:root:Search with 4 terms in 5 filters performed in 0.007903575897216797 seconds
+INFO:root:Search with 5 terms in 5 filters performed in 0.00805974006652832 seconds
+
+R2
+INFO:root:Search with 1 terms in 5 filters performed in 0.005096435546875 seconds
+INFO:root:Search with 2 terms in 5 filters performed in 0.007413625717163086 seconds
+INFO:root:Search with 3 terms in 5 filters performed in 0.0097808837890625 seconds
+INFO:root:Search with 4 terms in 5 filters performed in 0.010981321334838867 seconds
+INFO:root:Search with 5 terms in 5 filters performed in 0.008756160736083984 seconds
+
+R3
+INFO:root:Search with 1 terms in 5 filters performed in 0.0055484771728515625 seconds
+INFO:root:Search with 2 terms in 5 filters performed in 0.006866455078125 seconds
+INFO:root:Search with 3 terms in 5 filters performed in 0.00881814956665039 seconds
+INFO:root:Search with 4 terms in 5 filters performed in 0.010854721069335938 seconds
+INFO:root:Search with 5 terms in 5 filters performed in 0.008916378021240234 seconds
+
+
