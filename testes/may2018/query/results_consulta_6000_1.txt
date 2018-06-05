@@ -1,0 +1,68 @@
+INFO:root:Normalized 5 terms
+INFO:root:Remove duplicate: Before -> 5 / After -> 5
+INFO:root:Stopwords filter result: 5 terms
+['328b7036ab5cd0a7659992fc4ba471bc', '548a5d6c4081f0065a0106dabf74ff84', 'f6888d8146ef6c322748cab63d1a4012', '8ce4e2e75863c80ee64aa20c847893dd', 'fd9d2152a485a086e3018d0c448d3c01']
+Filtro >> f
+Round >> 1
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.0002396106719970703 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00030541419982910156 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.0003554821014404297 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0003986358642578125 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0004742145538330078 seconds
+Round >> 2
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00018715858459472656 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00025582313537597656 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.0003304481506347656 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.00040459632873535156 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.00047850608825683594 seconds
+Round >> 3
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.0001823902130126953 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00025773048400878906 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.0003199577331542969 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.00044155120849609375 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/f/6000
+INFO:root:Filter /home/wsantos/out/f/6000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0004830360412597656 seconds

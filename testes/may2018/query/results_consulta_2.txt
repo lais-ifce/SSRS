@@ -1,0 +1,324 @@
+INFO:root:Normalized 5 terms
+INFO:root:Remove duplicate: Before -> 5 / After -> 5
+INFO:root:Stopwords filter result: 5 terms
+['8ce4e2e75863c80ee64aa20c847893dd', 'fd9d2152a485a086e3018d0c448d3c01', '328b7036ab5cd0a7659992fc4ba471bc', 'f6888d8146ef6c322748cab63d1a4012', '548a5d6c4081f0065a0106dabf74ff84']
+Filtro >> a
+Round >> 1
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00015091896057128906 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.0001697540283203125 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.000202178955078125 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.00023484230041503906 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.00027060508728027344 seconds
+Round >> 2
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00012946128845214844 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.0001614093780517578 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00020432472229003906 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0002315044403076172 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.00026535987854003906 seconds
+Round >> 3
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00012683868408203125 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00016021728515625 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00019431114196777344 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0002300739288330078 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/a/500
+INFO:root:Filter /home/wsantos/out/a/500 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0002658367156982422 seconds
+Filtro >> b
+Round >> 1
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00013566017150878906 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00017118453979492188 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.000209808349609375 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0002491474151611328 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.00030493736267089844 seconds
+Round >> 2
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.000133514404296875 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.0001780986785888672 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00019884109497070312 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0002357959747314453 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.000274658203125 seconds
+Round >> 3
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00012612342834472656 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.0001621246337890625 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00020051002502441406 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0002353191375732422 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/b/1000
+INFO:root:Filter /home/wsantos/out/b/1000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.00027370452880859375 seconds
+Filtro >> c
+Round >> 1
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00014662742614746094 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.0001995563507080078 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00021910667419433594 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.00026106834411621094 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.00030303001403808594 seconds
+Round >> 2
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.0001385211944580078 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00017571449279785156 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00021886825561523438 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0002586841583251953 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0003018379211425781 seconds
+Round >> 3
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00013685226440429688 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00019097328186035156 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00021719932556152344 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0002472400665283203 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/c/2000
+INFO:root:Filter /home/wsantos/out/c/2000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0002911090850830078 seconds
+Filtro >> d
+Round >> 1
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00017523765563964844 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00022172927856445312 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.0002880096435546875 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0003261566162109375 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.00038051605224609375 seconds
+Round >> 2
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.0001590251922607422 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.0002143383026123047 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.0002853870391845703 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0003292560577392578 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0003745555877685547 seconds
+Round >> 3
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.0001590251922607422 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00021409988403320312 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00027561187744140625 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0003285408020019531 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/d/4000
+INFO:root:Filter /home/wsantos/out/d/4000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0003981590270996094 seconds
+Filtro >> e
+Round >> 1
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00024271011352539062 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00033473968505859375 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.0003941059112548828 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.00048089027404785156 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0005705356597900391 seconds
+Round >> 2
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00022840499877929688 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.00031065940856933594 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00040149688720703125 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.00048089027404785156 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0005638599395751953 seconds
+Round >> 3
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 1 terms in 1 filters performed in 0.00022530555725097656 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 2 terms in 1 filters performed in 0.0003120899200439453 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 3 terms in 1 filters performed in 0.00040149688720703125 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 4 terms in 1 filters performed in 0.0004887580871582031 seconds
+INFO:root:Retrieved 1 indexes
+INFO:root:/home/wsantos/out/e/8000
+INFO:root:Filter /home/wsantos/out/e/8000 loaded
+INFO:root:Search with 5 terms in 1 filters performed in 0.0006012916564941406 seconds

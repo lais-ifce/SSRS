@@ -20,6 +20,7 @@ def normalize(data):
     """
     try:
         data = [x.replace("-", "") for x in data]
+        data = [x.replace("\x0c", "") for x in data]
         data = [x.lower() for x in data if x.isalnum()]
         debug("Normalized {} terms".format(len(data)))
         return data

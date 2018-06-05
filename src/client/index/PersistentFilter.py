@@ -25,7 +25,7 @@ class PersistentFilter(Filter):
 
         super(PersistentFilter, self).__init__()
 
-        self.data = hash_terms(filter_stop(normalize(plain_path), lang), key)
+        self.data = hash_terms(filter_stop(normalize(self.extract(plain_path)), lang), key)
         self.false_positive = false
         self.len_filter = 0
         self.num_hash = 0
